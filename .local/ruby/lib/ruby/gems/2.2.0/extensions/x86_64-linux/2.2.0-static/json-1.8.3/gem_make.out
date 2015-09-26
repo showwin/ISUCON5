@@ -1,0 +1,9 @@
+/home/isucon/.local/ruby/bin/ruby -r ./siteconf20150926-21177-rdflmy.rb extconf.rb
+creating Makefile
+
+make "DESTDIR=" clean
+
+make "DESTDIR="
+make: Nothing to be done for 'all'.
+
+make "DESTDIR=" install
