@@ -156,9 +156,10 @@ SQL
   end
 
   get '/logout' do
-    session[:user_id] = nil
-    session.clear
-    redirect '/login'
+    # session[:user_id] = nil
+    # session.clear
+    # redirect '/login'
+    erb :login, layout: false, locals: { message: '高負荷に耐えられるSNSコミュニティサイトへようこそ!' }
   end
 
   get '/' do

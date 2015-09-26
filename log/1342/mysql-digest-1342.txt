@@ -1,0 +1,262 @@
+
+# 49.7s user time, 250ms system time, 26.68M rss, 73.28M vsz
+# Current date: Sat Sep 26 13:43:24 2015
+# Hostname: isucon5q
+# Files: /tmp/slow.log
+# Overall: 314.96k total, 36 unique, 3.28k QPS, 2.06x concurrency ________
+# Time range: 2015-09-26 13:40:33 to 13:42:09
+# Attribute          total     min     max     avg     95%  stddev  median
+# ============     ======= ======= ======= ======= ======= ======= =======
+# Exec time           198s    23us   515ms   629us   287us    12ms    98us
+# Lock time            13s       0    10ms    40us    52us    41us    35us
+# Rows sent        907.20k       0    1000    2.95    0.99   39.23    0.99
+# Rows examine     164.08M       0 483.55k  546.26    0.99  15.32k       0
+# Query size        22.49M      11   1.04k   74.87   76.28   29.45   76.28
+
+# Profile
+# Rank Query ID           Response time  Calls  R/Call V/M   Item
+# ==== ================== ============== ====== ====== ===== =============
+#    1 0xDE6DD0309F9386F8 116.5026 58.8%    346 0.3367  0.00 SELECT relations
+#    2 0x975052A65FC1456C  41.3748 20.9% 273640 0.0002  0.00 SELECT relations
+#    3 0x0A092E9E1D18C33C   8.0628  4.1%    253 0.0319  0.21 SELECT comments
+#    4 0x064A5B2042FC8316   7.9204  4.0%    253 0.0313  0.00 SELECT entries
+#    5 0x57EBD74C3B600DB8   7.0286  3.5%     68 0.1034  0.27 SELECT entries
+#    6 0x831AD2FB940FC23C   3.7854  1.9%  26091 0.0001  0.00 SELECT users
+#    7 0x2D243C679322D8C8   2.4206  1.2%    253 0.0096  0.00 SELECT comments
+#    8 0xC2B6AC7BA77EC625   2.2712  1.1%    343 0.0066  0.00 INSERT footprints
+# MISC 0xMISC               8.7791  4.4%  13709 0.0006   0.0 <28 ITEMS>
+
+# Query 1: 3.89 QPS, 1.31x concurrency, ID 0xDE6DD0309F9386F8 at byte 45528610
+# Scores: V/M = 0.00
+# Time range: 2015-09-26 13:40:34 to 13:42:03
+# Attribute    pct   total     min     max     avg     95%  stddev  median
+# ============ === ======= ======= ======= ======= ======= ======= =======
+# Count          0     346
+# Exec time     58    117s   180ms   458ms   337ms   356ms    35ms   339ms
+# Lock time      0    16ms    28us   202us    46us    60us    14us    40us
+# Rows sent      7  68.23k     170     230  201.94  212.52   13.24  202.40
+# Rows examine  99 163.37M 483.48k 483.55k 483.51k 462.39k       0 462.39k
+# Query size     0  29.26k      85      87   86.61   84.10       0   84.10
+# String:
+# Hosts        localhost
+# Users        root
+# Query_time distribution
+#   1us
+#  10us
+# 100us
+#   1ms
+#  10ms
+# 100ms  ################################################################
+#    1s
+#  10s+
+# Tables
+#    SHOW TABLE STATUS LIKE 'relations'\G
+#    SHOW CREATE TABLE `relations`\G
+# EXPLAIN /*!50100 PARTITIONS*/
+SELECT * FROM relations WHERE one = '1383' OR another = '1383' ORDER BY created_at DESC\G
+
+# Query 2: 3.04k QPS, 0.46x concurrency, ID 0x975052A65FC1456C at byte 53354872
+# Scores: V/M = 0.00
+# Time range: 2015-09-26 13:40:33 to 13:42:03
+# Attribute    pct   total     min     max     avg     95%  stddev  median
+# ============ === ======= ======= ======= ======= ======= ======= =======
+# Count         86  273640
+# Exec time     20     41s    52us    13ms   151us   273us   136us    98us
+# Lock time     87     11s    22us    10ms    40us    52us    43us    35us
+# Rows sent     29 267.23k       1       1       1       1       0       1
+# Rows examine   0   5.21k       0       1    0.02       0    0.14       0
+# Query size    91  20.50M      75      79   78.55   76.28    0.35   76.28
+# String:
+# Hosts        localhost
+# Users        root
+# Query_time distribution
+#   1us
+#  10us  #############################################################
+# 100us  ################################################################
+#   1ms  #
+#  10ms  #
+# 100ms
+#    1s
+#  10s+
+# Tables
+#    SHOW TABLE STATUS LIKE 'relations'\G
+#    SHOW CREATE TABLE `relations`\G
+# EXPLAIN /*!50100 PARTITIONS*/
+SELECT COUNT(*) AS cnt FROM relations WHERE (one = '1476' AND another = '1181')\G
+
+# Query 3: 2.81 QPS, 0.09x concurrency, ID 0x0A092E9E1D18C33C at byte 1267708
+# Scores: V/M = 0.21
+# Time range: 2015-09-26 13:40:33 to 13:42:03
+# Attribute    pct   total     min     max     avg     95%  stddev  median
+# ============ === ======= ======= ======= ======= ======= ======= =======
+# Count          0     253
+# Exec time      4      8s     1ms   362ms    32ms   241ms    81ms     2ms
+# Lock time      0    37ms    88us   748us   147us   176us    44us   138us
+# Rows sent      0   2.47k      10      10      10      10       0      10
+# Rows examine   0  77.09k     310     316     312  313.99       3  299.03
+# Query size     1 253.04k    1002   1.04k   1.00k 1012.63   18.83 1012.63
+# String:
+# Hosts        localhost
+# Users        root
+# Query_time distribution
+#   1us
+#  10us
+# 100us
+#   1ms  ################################################################
+#  10ms
+# 100ms  ########
+#    1s
+#  10s+
+# Tables
+#    SHOW TABLE STATUS LIKE 'comments'\G
+#    SHOW CREATE TABLE `comments`\G
+# EXPLAIN /*!50100 PARTITIONS*/
+select id, entry_id, user_id, comment, created_at
+    from comments
+    where entry_id in ('739','3424','3787','4792','6594','25357','26209','28989','36609','37783','41628','41771','43198','44754','55131','63423','68528','70758','80800','83378','86189','90137','106192','106495','107625','113848','113872','119536','125796','134235','134546','137790','142270','155768','156944','160997','175132','177815','180535','183528','200679','201415','202012','218634','221835','227595','233037','237636','244746','254737','254746','255714','258555','261073','264498','265770','266235','284840','304682','312016','319255','320975','327793','331760','333611','335748','336790','342667','348024','348876','358222','358657','359870','360306','364441','365354','366281','366817','375206','378761','382033','391157','394095','406785','425608','431289','433672','434837','441888','443758','453973','459361','461354','464398','465457','472827','473302','473933','480958','487424')
+    order by created_at desc
+    limit 10\G
+
+# Query 4: 2.81 QPS, 0.09x concurrency, ID 0x064A5B2042FC8316 at byte 67563443
+# Scores: V/M = 0.00
+# Time range: 2015-09-26 13:40:33 to 13:42:03
+# Attribute    pct   total     min     max     avg     95%  stddev  median
+# ============ === ======= ======= ======= ======= ======= ======= =======
+# Count          0     253
+# Exec time      3      8s    18ms    76ms    31ms    42ms     6ms    30ms
+# Lock time      0    10ms    26us   171us    41us    63us    16us    33us
+# Rows sent     27 247.07k    1000    1000    1000    1000       0    1000
+# Rows examine   0 247.07k    1000    1000    1000    1000       0    1000
+# Query size     0  14.08k      57      57      57      57       0      57
+# String:
+# Hosts        localhost
+# Users        root
+# Query_time distribution
+#   1us
+#  10us
+# 100us
+#   1ms
+#  10ms  ################################################################
+# 100ms
+#    1s
+#  10s+
+# Tables
+#    SHOW TABLE STATUS LIKE 'entries'\G
+#    SHOW CREATE TABLE `entries`\G
+# EXPLAIN /*!50100 PARTITIONS*/
+SELECT * FROM entries ORDER BY created_at DESC LIMIT 1000\G
+
+# Query 5: 1.11 QPS, 0.12x concurrency, ID 0x57EBD74C3B600DB8 at byte 23673772
+# Scores: V/M = 0.27
+# Time range: 2015-09-26 13:41:01 to 13:42:02
+# Attribute    pct   total     min     max     avg     95%  stddev  median
+# ============ === ======= ======= ======= ======= ======= ======= =======
+# Count          0      68
+# Exec time      3      7s   666us   515ms   103ms   412ms   167ms     2ms
+# Lock time      0     3ms    33us    67us    47us    60us     7us    44us
+# Rows sent      0   1.33k      20      20      20      20       0      20
+# Rows examine   0   1.49k      20      26   22.47   24.84    1.54   21.45
+# Query size     0   6.09k      91      92   91.76   88.31    0.00   88.31
+# String:
+# Hosts        localhost
+# Users        root
+# Query_time distribution
+#   1us
+#  10us
+# 100us  ################################################################
+#   1ms  #############################################################
+#  10ms  ##
+# 100ms  ##############################################
+#    1s
+#  10s+
+# Tables
+#    SHOW TABLE STATUS LIKE 'entries'\G
+#    SHOW CREATE TABLE `entries`\G
+# EXPLAIN /*!50100 PARTITIONS*/
+SELECT * FROM entries WHERE user_id = '1029' AND private=0 ORDER BY created_at DESC LIMIT 20\G
+
+# Query 6: 293.16 QPS, 0.04x concurrency, ID 0x831AD2FB940FC23C at byte 60955182
+# Scores: V/M = 0.00
+# Time range: 2015-09-26 13:40:34 to 13:42:03
+# Attribute    pct   total     min     max     avg     95%  stddev  median
+# ============ === ======= ======= ======= ======= ======= ======= =======
+# Count          8   26091
+# Exec time      1      4s    55us    10ms   145us   301us   167us    89us
+# Lock time      7   953ms    21us     2ms    36us    49us    20us    31us
+# Rows sent      2  25.48k       1       1       1       1       0       1
+# Rows examine   0  25.48k       1       1       1       1       0       1
+# Query size     4 937.17k      34      37   36.78   36.69    0.70   36.69
+# String:
+# Hosts        localhost
+# Users        root
+# Query_time distribution
+#   1us
+#  10us  ################################################################
+# 100us  ###############################################
+#   1ms  #
+#  10ms  #
+# 100ms
+#    1s
+#  10s+
+# Tables
+#    SHOW TABLE STATUS LIKE 'users'\G
+#    SHOW CREATE TABLE `users`\G
+# EXPLAIN /*!50100 PARTITIONS*/
+SELECT * FROM users WHERE id = '513'\G
+
+# Query 7: 2.81 QPS, 0.03x concurrency, ID 0x2D243C679322D8C8 at byte 37224511
+# Scores: V/M = 0.00
+# Time range: 2015-09-26 13:40:33 to 13:42:03
+# Attribute    pct   total     min     max     avg     95%  stddev  median
+# ============ === ======= ======= ======= ======= ======= ======= =======
+# Count          0     253
+# Exec time      1      2s     5ms    28ms    10ms    13ms     3ms     9ms
+# Lock time      0    11ms    24us   169us    42us    57us    11us    38us
+# Rows sent     27 247.07k    1000    1000    1000    1000       0    1000
+# Rows examine   0 247.07k    1000    1000    1000    1000       0    1000
+# Query size     0  14.33k      58      58      58      58       0      58
+# String:
+# Hosts        localhost
+# Users        root
+# Query_time distribution
+#   1us
+#  10us
+# 100us
+#   1ms  ################################################################
+#  10ms  ############################
+# 100ms
+#    1s
+#  10s+
+# Tables
+#    SHOW TABLE STATUS LIKE 'comments'\G
+#    SHOW CREATE TABLE `comments`\G
+# EXPLAIN /*!50100 PARTITIONS*/
+SELECT * FROM comments ORDER BY created_at DESC LIMIT 1000\G
+
+# Query 8: 5.44 QPS, 0.04x concurrency, ID 0xC2B6AC7BA77EC625 at byte 53783434
+# Scores: V/M = 0.00
+# Time range: 2015-09-26 13:40:59 to 13:42:02
+# Attribute    pct   total     min     max     avg     95%  stddev  median
+# ============ === ======= ======= ======= ======= ======= ======= =======
+# Count          0     343
+# Exec time      1      2s     2ms    52ms     7ms    16ms     5ms     4ms
+# Lock time      0    15ms    25us   172us    44us    63us    14us    40us
+# Rows sent      0       0       0       0       0       0       0       0
+# Rows examine   0       0       0       0       0       0       0       0
+# Query size     0  21.29k      62      64   63.55   62.76    0.68   62.76
+# String:
+# Hosts        localhost
+# Users        root
+# Query_time distribution
+#   1us
+#  10us
+# 100us
+#   1ms  ################################################################
+#  10ms  ##############
+# 100ms
+#    1s
+#  10s+
+# Tables
+#    SHOW TABLE STATUS LIKE 'footprints'\G
+#    SHOW CREATE TABLE `footprints`\G
+INSERT INTO footprints (user_id,owner_id) VALUES ('573','1029')\G
