@@ -12,12 +12,26 @@
 
 # Command Line History (newest to oldest):
 :q
-:wq
-:set paste
-:w
 :q!
+:wq
+:w
+:w!
+:set paste
 
 # Search String History (newest to oldest):
+?/mark_footprint
+?/diary/entr
+?/get_user
+?/authenticated
+?/'/'
+?/select c.id
+?/\/
+?//
+?/comments_of_
+?/comment
+?/comments_for
+?/comments_for_me
+?/comments_for_me_query
 ?/JOIN
 ?/initi
 ?/get_ini
@@ -29,29 +43,40 @@
 # Input Line History (newest to oldest):
 
 # Registers:
+"0	LINE	0
+	    location /fonts/ {
+	      open_file_cache max=200;
+	    }
 "1	LINE	0
 	# listen 8080
 "2	LINE	0
 	slow_queries_log = 1
 ""-	CHAR	0
-	’
+	0
 
 # File marks:
-'0  297  0  ~/webapp/ruby/app.rb
+'0  2  15  ~/webapp/ruby/unicorn_config.rb
 '1  1  0  ~/webapp/ruby/unicorn_config.rb
-'2  1  0  ~/webapp/ruby/unicorn
-'3  1  0  ~/webapp/ruby/mu
-'4  4  24  ~/webapp/ruby/unicorn_config.rb
-'5  58  202  ~/slack.sh
-'6  36  13  ~/create_digest.sh
-'7  1  0  /tmp/slow.log
-'8  11  2  ~/git_push.sh
-'9  5  3  ~/git_push.sh
+'2  1  18  /etc/nginx/nginx.conf
+'3  69  9  ~/webapp/ruby/views/index.erb
+'4  184  0  ~/webapp/ruby/app.rb
+'5  54  20  /etc/mysql/mysql.conf.d/mysqld.cnf
+'6  297  0  ~/webapp/ruby/app.rb
+'7  1  0  ~/webapp/ruby/unicorn
+'8  1  0  ~/webapp/ruby/mu
+'9  4  24  ~/webapp/ruby/unicorn_config.rb
 
 # Jumplist (newest first):
--'  297  0  ~/webapp/ruby/app.rb
--'  1  0  ~/webapp/ruby/app.rb
+-'  2  15  ~/webapp/ruby/unicorn_config.rb
 -'  1  0  ~/webapp/ruby/unicorn_config.rb
+-'  1  18  /etc/nginx/nginx.conf
+-'  69  9  ~/webapp/ruby/views/index.erb
+-'  1  0  ~/webapp/ruby/views/index.erb
+-'  184  0  ~/webapp/ruby/app.rb
+-'  1  0  ~/webapp/ruby/app.rb
+-'  54  20  /etc/mysql/mysql.conf.d/mysqld.cnf
+-'  1  0  /etc/mysql/mysql.conf.d/mysqld.cnf
+-'  297  0  ~/webapp/ruby/app.rb
 -'  1  0  ~/webapp/ruby/unicorn
 -'  1  0  ~/webapp/ruby/mu
 -'  4  24  ~/webapp/ruby/unicorn_config.rb
@@ -65,7 +90,6 @@
 -'  5  3  ~/git_push.sh
 -'  29  7  ~/git_push.sh
 -'  31  17  /etc/mysql/mysql.conf.d/mysqld.cnf
--'  1  0  /etc/mysql/mysql.conf.d/mysqld.cnf
 -'  1  0  /etc/mysql/mysql.conf.d/mysqld_safe_syslog.cnf
 -'  1  0  /etc/mysql/my.cnf
 -'  1  0  /etc/mysql/conf.d/mysql.cnf
@@ -78,7 +102,7 @@
 -'  40  29  ~/git_push.sh
 -'  1  0  /etc/mysql/mysql.cnf
 -'  1  0  /etc/mysql/my.cnf.fallback
--'  108  0  /etc/mysql/mysql.conf.d/mysqld.cnf
+-'  116  0  /etc/mysql/mysql.conf.d/mysqld.cnf
 -'  9  0  /etc/mysql/mysql.conf.d/mysqld.cnf
 -'  2  0  /etc/mysql/mysql.conf.d/mysqld_safe_syslog.cnf
 -'  8  17  /etc/my.cnf
@@ -141,26 +165,64 @@
 -'  1  0  /etc/supervisord.conf
 -'  1  0  /etc/supervisord.conf
 -'  60  0  /etc/sysctl.conf
--'  1  0  /etc/sysctl.conf
--'  1  0  /etc/supervisord.conf
--'  1  0  /etc/supervisord.conf
--'  60  0  /etc/sysctl.conf
--'  1  0  /etc/sysctl.conf
--'  1  0  /etc/supervisord.conf
 
 # History of marks within files (newest to oldest):
 
-> ~/webapp/ruby/app.rb
-	"	297	0
-
 > ~/webapp/ruby/unicorn_config.rb
-	"	1	17
+	"	2	15
 	^	3	26
 	.	1	17
 	+	3	25
 	+	4	0
 	+	3	25
 	+	1	17
+
+> /etc/nginx/nginx.conf
+	"	1	18
+	.	1	18
+	+	33	4
+	+	20	36
+	+	22	23
+	+	24	0
+	+	22	16
+	+	25	4
+	+	26	18
+	+	29	4
+	+	30	15
+	+	13	6
+	+	16	34
+	+	17	0
+	+	1	18
+
+> ~/webapp/ruby/views/index.erb
+	"	69	9
+
+> ~/webapp/ruby/app.rb
+	"	282	4
+
+> ~/webapp/ruby/views/entries.erb
+	"	39	0
+
+> /etc/mysql/mysql.conf.d/mysqld.cnf
+	"	54	20
+	^	59	21
+	.	59	20
+	+	31	24
+	+	33	37
+	+	31	17
+	+	51	21
+	+	62	0
+	+	55	29
+	+	56	0
+	+	71	28
+	+	73	17
+	+	98	0
+	+	97	0
+	+	53	0
+	+	54	0
+	+	57	25
+	+	58	21
+	+	59	20
 
 > ~/webapp/ruby/unicorn
 	"	1	0
@@ -203,14 +265,6 @@
 
 > /tmp/access.log
 	"	1	0
-
-> /etc/mysql/mysql.conf.d/mysqld.cnf
-	"	31	17
-	^	34	0
-	.	31	17
-	+	31	24
-	+	33	37
-	+	31	17
 
 > /etc/mysql/mysql.conf.d/mysqld_safe_syslog.cnf
 	"	1	0

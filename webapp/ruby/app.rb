@@ -170,15 +170,28 @@ SQL
     entries = db.xquery(entries_query, current_user[:id])
       .map{ |entry| entry[:is_private] = (entry[:private] == 1); entry[:title], entry[:content] = entry[:body].split(/\n/, 2); entry }
 
-    comments_for_me_query = <<SQL
-SELECT c.id AS id, c.entry_id AS entry_id, c.user_id AS user_id, c.comment AS comment, c.created_at AS created_at
-FROM comments c
-JOIN entries e ON c.entry_id = e.id
-WHERE e.user_id = ?
-ORDER BY c.created_at DESC
-LIMIT 10
+    #comments_for_me_query = <<SQL
+#SELECT c.id AS id, c.entry_id AS entry_id, c.user_id AS user_id, c.comment AS comment, c.created_at AS created_at
+#FROM comments c
+#JOIN entries e ON c.entry_id = e.id
+#WHERE e.user_id = ?
+#ORDER BY c.created_at DESC
+#LIMIT 10
+#SQL
+    comments_for_me_query_sub = <<SQL
+    select id from entries where user_id = ?    
 SQL
-    comments_for_me = db.xquery(comments_for_me_query, current_user[:id])
+    comments_for_me_sub = db.xquery(comments_for_me_query_sub, current_user[:id])
+    entry_ids = comments_for_me_sub[:id]
+
+    comments_for_me_query = <<SQL
+    select id, entry_id, user_id, comment, created_at
+    from comemnts
+    where entry_id in (?)
+    order by created_at desc
+    limit 10
+SQL
+    comments_for_me = db.xquery(comments_for_me_query, entry_ids)
 
     entries_of_friends = []
     db.query('SELECT * FROM entries ORDER BY created_at DESC LIMIT 1000').each do |entry|
