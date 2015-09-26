@@ -7,12 +7,18 @@
 
 # hlsearch on (H) or off (h):
 ~h
+# Last Search Pattern:
+~MSle0~/get_ini
+
 # Command Line History (newest to oldest):
 :wq
 :q
+:set paste
+:w
 :q!
 
 # Search String History (newest to oldest):
+?/get_ini
 
 # Expression History (newest to oldest):
 
@@ -21,21 +27,50 @@
 # Input Line History (newest to oldest):
 
 # Registers:
+"1	LINE	0
+	slow_queries_log = 1
+""-	CHAR	0
+	f
 
 # File marks:
-'0  1  3  ~/.gitignore
-'1  1  0  ~/.vimrc
-'2  2  0  ~/env.sh
-'3  1  0  ~/env.sh
-'4  60  0  /etc/sysctl.conf
-'5  1  0  /etc/supervisord.conf
-'6  71  11  ~/.vimrc
+'0  11  2  ~/git_push.sh
+'1  5  3  ~/git_push.sh
+'2  29  7  ~/git_push.sh
+'3  1  0  /tmp/slow.log
+'4  31  17  /etc/mysql/mysql.conf.d/mysqld.cnf
+'5  1  0  /etc/mysql/mysql.conf.d/mysqld.cnf
+'6  1  0  /etc/mysql/mysql.conf.d/mysqld_safe_syslog.cnf
+'7  1  0  /etc/mysql/my.cnf
+'8  1  0  /etc/mysql/conf.d/mysql.cnf
+'9  1  0  /etc/my.cnf.org_deep
 
 # Jumplist (newest first):
+-'  11  2  ~/git_push.sh
+-'  1  0  ~/git_push.sh
+-'  5  3  ~/git_push.sh
+-'  29  7  ~/git_push.sh
+-'  1  0  /tmp/slow.log
+-'  31  17  /etc/mysql/mysql.conf.d/mysqld.cnf
+-'  1  0  /etc/mysql/mysql.conf.d/mysqld.cnf
+-'  1  0  /etc/mysql/mysql.conf.d/mysqld_safe_syslog.cnf
+-'  1  0  /etc/mysql/my.cnf
+-'  1  0  /etc/mysql/conf.d/mysql.cnf
+-'  1  0  /etc/my.cnf.org_deep
+-'  104  0  /etc/my.cnf.org_deep
+-'  2  0  /etc/my.cnf
+-'  1  0  /etc/my.cnf
+-'  1  0  ~/env.sh
+-'  1  0  /etc/redis.conf
+-'  40  29  ~/git_push.sh
+-'  1  0  /etc/mysql/mysql.cnf
+-'  1  0  /etc/mysql/my.cnf.fallback
+-'  108  0  /etc/mysql/mysql.conf.d/mysqld.cnf
+-'  9  0  /etc/mysql/mysql.conf.d/mysqld.cnf
+-'  2  0  /etc/mysql/mysql.conf.d/mysqld_safe_syslog.cnf
+-'  8  17  /etc/my.cnf
 -'  1  3  ~/.gitignore
 -'  1  0  ~/.vimrc
 -'  2  0  ~/env.sh
--'  1  0  ~/env.sh
 -'  60  0  /etc/sysctl.conf
 -'  1  0  /etc/sysctl.conf
 -'  1  0  /etc/supervisord.conf
@@ -53,8 +88,6 @@
 -'  1  0  /etc/sysctl.conf
 -'  1  0  /etc/supervisord.conf
 -'  1  0  /etc/supervisord.conf
--'  2  0  ~/env.sh
--'  1  0  ~/env.sh
 -'  60  0  /etc/sysctl.conf
 -'  1  0  /etc/sysctl.conf
 -'  1  0  /etc/supervisord.conf
@@ -72,8 +105,6 @@
 -'  1  0  /etc/supervisord.conf
 -'  1  0  /etc/supervisord.conf
 -'  1  0  ~/.vimrc
--'  2  0  ~/env.sh
--'  1  0  ~/env.sh
 -'  60  0  /etc/sysctl.conf
 -'  1  0  /etc/sysctl.conf
 -'  1  0  /etc/supervisord.conf
@@ -91,26 +122,88 @@
 -'  1  0  /etc/sysctl.conf
 -'  1  0  /etc/supervisord.conf
 -'  1  0  /etc/supervisord.conf
--'  2  0  ~/env.sh
+-'  60  0  /etc/sysctl.conf
+-'  1  0  /etc/sysctl.conf
+-'  1  0  /etc/supervisord.conf
+-'  1  0  /etc/supervisord.conf
+-'  60  0  /etc/sysctl.conf
+-'  1  0  /etc/sysctl.conf
+-'  1  0  /etc/supervisord.conf
+-'  1  0  /etc/supervisord.conf
+-'  60  0  /etc/sysctl.conf
+-'  1  0  /etc/sysctl.conf
+-'  1  0  /etc/supervisord.conf
+-'  1  0  /etc/supervisord.conf
+-'  60  0  /etc/sysctl.conf
+-'  1  0  /etc/sysctl.conf
+-'  1  0  /etc/supervisord.conf
+-'  1  0  /etc/supervisord.conf
+-'  1  3  ~/.gitignore
+-'  1  0  ~/.vimrc
+-'  60  0  /etc/sysctl.conf
 -'  1  0  ~/env.sh
--'  60  0  /etc/sysctl.conf
--'  1  0  /etc/sysctl.conf
--'  1  0  /etc/supervisord.conf
--'  1  0  /etc/supervisord.conf
--'  60  0  /etc/sysctl.conf
--'  1  0  /etc/sysctl.conf
--'  1  0  /etc/supervisord.conf
--'  1  0  /etc/supervisord.conf
--'  60  0  /etc/sysctl.conf
--'  1  0  /etc/sysctl.conf
--'  1  0  /etc/supervisord.conf
--'  1  0  /etc/supervisord.conf
--'  60  0  /etc/sysctl.conf
--'  1  0  /etc/sysctl.conf
--'  1  0  /etc/supervisord.conf
--'  1  0  /etc/supervisord.conf
 
 # History of marks within files (newest to oldest):
+
+> ~/git_push.sh
+	"	11	2
+	^	23	3
+	.	23	2
+	+	40	0
+	+	29	37
+	+	5	0
+	+	11	2
+	+	17	2
+	+	23	2
+
+> /tmp/access.log
+	"	1	0
+
+> /tmp/slow.log
+	"	1	0
+
+> /etc/mysql/mysql.conf.d/mysqld.cnf
+	"	31	17
+	^	34	0
+	.	31	17
+	+	31	24
+	+	33	37
+	+	31	17
+
+> ~/webapp/ruby/app.rb
+	"	351	0
+
+> /etc/mysql/mysql.conf.d/mysqld_safe_syslog.cnf
+	"	1	0
+
+> /etc/mysql/my.cnf
+	"	1	0
+
+> /etc/mysql/conf.d/mysql.cnf
+	"	1	0
+
+> /etc/my.cnf.org_deep
+	"	1	0
+
+> /etc/my.cnf
+	"	2	0
+	^	8	18
+	.	8	0
+	+	7	0
+	+	10	0
+	+	8	0
+
+> ~/env.sh
+	"	1	0
+
+> /etc/redis.conf
+	"	1	0
+
+> /etc/mysql/mysql.cnf
+	"	1	0
+
+> /etc/mysql/my.cnf.fallback
+	"	1	0
 
 > ~/.gitignore
 	"	1	3
@@ -123,9 +216,6 @@
 	^	71	12
 	.	71	5
 	+	71	5
-
-> ~/env.sh
-	"	2	0
 
 > /etc/sysctl.conf
 	"	60	0
