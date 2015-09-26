@@ -189,10 +189,11 @@ SQL
     end
     
     comments_for_me_query = <<SQL
-    select id, entry_id, user_id, comment, created_at
-    from comments
-    where entry_id in (?)
-    order by created_at desc
+    select c.id, c.entry_id, c.user_id, c.comment, c.created_at, users.account_name as account_name, users.nick_name as nick_name
+    from comments as c
+    inner join users on users.id = c.user_id
+    where c.entry_id in (?)
+    order by c.created_at desc
     limit 10
 SQL
     comments_for_me = db.xquery(comments_for_me_query, entry_ids)
@@ -224,10 +225,11 @@ SQL
     friends = friends_map.map{|user_id, created_at| [user_id, created_at]}
 
     query = <<SQL
-SELECT user_id, owner_id, DATE(created_at) AS date, MAX(created_at) AS updated
-FROM footprints
-WHERE user_id = ?
-GROUP BY user_id, owner_id, DATE(created_at)
+SELECT f.user_id, f.owner_id, DATE(f.created_at) AS date, MAX(f.created_at) AS updated, users.account_name as account_name, users.nick_name as nick_name
+FROM footprints as f
+INNER JOIN users ON users.id = f.owner_id
+WHERE f.user_id = ?
+GROUP BY f.user_id, f.owner_id, DATE(f.created_at)
 ORDER BY updated DESC
 LIMIT 10
 SQL

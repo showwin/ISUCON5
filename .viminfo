@@ -15,31 +15,44 @@ $
 
 # Command Line History (newest to oldest):
 :q
-:q!
+:wq
 :w
 :noh
 :w!
+:158
+:q!
 :310
 :185
-:wq
 :nih
 :set paste
 
 # Search String History (newest to oldest):
+?/is_friend
+?/limit
+?/entries_of_friends
+?/is_friend?
+?/comments_for_me
+?/get_user
+?/prefectur
+?/PREFS
+?/prefectures
+?/get
+?/post
+?/popst
+?/redirect
+?/diary/ent
+?/logout
 ?/\/friends
 ?//friends/
 ?/relations
-?/redirect
 ?/AND another = 
 ?/INSERT INTO relations
-?/get
 ?/SELECT user_id, owner_id, DATE(created_at) AS date
 ?/count(1)
 ?/logou
 ?/comments_for_me_query
 ?/mark_footprint
 ?/diary/entr
-?/get_user
 ?/authenticated
 ?/'/'
 ?/select c.id
@@ -48,7 +61,6 @@ $
 ?/comments_of_
 ?/comment
 ?/comments_for
-?/comments_for_me
 ?/JOIN
 ?/initi
 ?/get_ini
@@ -76,30 +88,38 @@ $
 	slow_queries_log = 1
 "6	LINE	0
 	slow_queries_log = 1
+"7	LINE	0
+	    comments_for_me_sub = db.xquery(comments_for_me_query_sub, current_user[:id])
+"8	LINE	0
+	slow_queries_log = 1
+"9	LINE	0
+	slow_queries_log = 1
 ""-	CHAR	0
 	0
 
 # File marks:
-'0  13  17  ~/webapp/ruby/views/profile.erb
-'1  1  0  ~/webapp/ruby/unicorn_config.rb
-'2  1  18  /etc/nginx/nginx.conf
-'3  69  9  ~/webapp/ruby/views/index.erb
-'4  184  0  ~/webapp/ruby/app.rb
-'5  54  20  /etc/mysql/mysql.conf.d/mysqld.cnf
-'6  297  0  ~/webapp/ruby/app.rb
-'7  1  0  ~/webapp/ruby/unicorn
-'8  1  0  ~/webapp/ruby/mu
-'9  4  24  ~/webapp/ruby/unicorn_config.rb
+'0  387  0  ~/webapp/ruby/app.rb
+'1  33  0  ~/webapp/ruby/views/index.erb
+'2  13  17  ~/webapp/ruby/views/profile.erb
+'3  1  0  ~/webapp/ruby/unicorn_config.rb
+'4  1  18  /etc/nginx/nginx.conf
+'5  69  9  ~/webapp/ruby/views/index.erb
+'6  184  0  ~/webapp/ruby/app.rb
+'7  54  20  /etc/mysql/mysql.conf.d/mysqld.cnf
+'8  297  0  ~/webapp/ruby/app.rb
+'9  1  0  ~/webapp/ruby/unicorn
 
 # Jumplist (newest first):
+-'  387  0  ~/webapp/ruby/app.rb
+-'  1  0  ~/webapp/ruby/app.rb
+-'  33  0  ~/webapp/ruby/views/index.erb
+-'  1  0  ~/webapp/ruby/views/index.erb
 -'  13  17  ~/webapp/ruby/views/profile.erb
 -'  1  0  ~/webapp/ruby/views/profile.erb
 -'  1  0  ~/webapp/ruby/unicorn_config.rb
 -'  1  18  /etc/nginx/nginx.conf
 -'  69  9  ~/webapp/ruby/views/index.erb
--'  1  0  ~/webapp/ruby/views/index.erb
 -'  184  0  ~/webapp/ruby/app.rb
--'  1  0  ~/webapp/ruby/app.rb
 -'  54  20  /etc/mysql/mysql.conf.d/mysqld.cnf
 -'  1  0  /etc/mysql/mysql.conf.d/mysqld.cnf
 -'  297  0  ~/webapp/ruby/app.rb
@@ -187,19 +207,13 @@ $
 -'  1  0  /etc/supervisord.conf
 -'  1  0  /etc/supervisord.conf
 -'  60  0  /etc/sysctl.conf
--'  1  0  /etc/sysctl.conf
--'  1  0  /etc/supervisord.conf
--'  1  0  /etc/supervisord.conf
 
 # History of marks within files (newest to oldest):
 
-> ~/webapp/ruby/views/profile.erb
-	"	13	17
-
 > ~/webapp/ruby/app.rb
-	"	253	35
+	"	387	0
 	^	192	14
-	.	105	48
+	.	192	14
 	+	185	91
 	+	185	40
 	+	185	80
@@ -213,10 +227,21 @@ $
 	+	184	0
 	+	182	18
 	+	192	14
-	+	104	28
-	+	373	0
-	+	104	84
-	+	105	48
+
+> ~/webapp/ruby/views/index.erb
+	"	33	0
+
+> ~/webapp/ruby/views/entries.erb
+	"	37	0
+
+> ~/webapp/ruby/views/friends.erb
+	"	1	0
+
+> ~/webapp/ruby/views/profile.erb
+	"	71	0
+
+> ~/webapp/ruby/Gemfile
+	"	1	0
 
 > /etc/nginx/nginx.conf
 	"	1	18
@@ -249,12 +274,6 @@ $
 
 > ~/webapp/ruby/views/layout.erb
 	"	1	0
-
-> ~/webapp/ruby/views/index.erb
-	"	58	0
-
-> ~/webapp/ruby/views/entries.erb
-	"	39	0
 
 > /etc/mysql/mysql.conf.d/mysqld.cnf
 	"	54	20
