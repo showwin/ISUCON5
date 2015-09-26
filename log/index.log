@@ -1,0 +1,226 @@
+[Rack::Lineprof] ===============================================================
+
+app.rb
+               |  18    module TimeWithoutZone
+               |  19      def to_s
+   0.3ms    78 |  20        strftime("%F %H:%M:%S")
+               |  21      end
+               |  22    end
+              .......
+               |  50      def db
+               |  51        return Thread.current[:isucon5_db] if Thread.current[:isucon5_db]
+   1.7ms     2 |  52        client = Mysql2::Client.new(
+               |  53          socket: '/var/run/mysqld/mysqld.sock',
+               |  54          #host: config[:db][:host],
+              .......
+               |  81      def current_user
+               |  82        return @user if @user
+   0.2ms     2 |  83        unless session[:user_id]
+               |  84          return nil
+               |  85        end
+   2.2ms     6 |  86        @user = db.xquery('SELECT id, account_name, nick_name, email FROM users WHERE id=?', session[:user_id]).first
+               |  87        unless @user
+               |  88          session[:user_id] = nil
+              .......
+               |  94
+               |  95      def authenticated!
+   2.5ms     1 |  96        unless current_user
+               |  97          redirect '/login'
+               |  98        end
+              .......
+               |  100
+               |  101      def get_user(user_id)
+  28.7ms   112 |  102        user = db.xquery('SELECT * FROM users WHERE id = ?', user_id).first
+               |  103        raise Isucon5::ContentNotFound unless user
+               |  104        user
+              .......
+               |  115        # query = 'SELECT COUNT(*) AS cnt FROM relations WHERE (one = ? AND another = ?)'
+               |  116        query = 'SELECT 1 AS cnt FROM relations WHERE (one = ? AND another = ?) limit 1'
+   0.3ms     5 |  117        !db.xquery(query, user_id, another_id).first.nil?
+               |  118      end
+               |  119
+              .......
+               |  123
+               |  124      def permitted?(another_id)
+   0.3ms     2 |  125        another_id == current_user[:id] || is_friend?(another_id)
+               |  126      end
+               |  127
+              .......
+               |  175
+               |  176    get '/' do
+   2.5ms     1 |  177      authenticated!
+               |  178
+   0.4ms     9 |  179      profile = db.xquery('SELECT * FROM profiles WHERE user_id = ?', current_user[:id]).first
+               |  180
+               |  181      entries_query = 'SELECT * FROM entries WHERE user_id = ? ORDER BY created_at LIMIT 5'
+  28.6ms     3 |  182      entries = db.xquery(entries_query, current_user[:id])
+   0.3ms    22 |  183        .map{ |entry| entry[:is_private] = (entry[:private] == 1); entry[:title], entry[:content] = entry[:body].split(/\n/, 2); entry }
+               |  184
+               |  185      #comments_for_me_query = <<SQL
+              .......
+               |  194      select id as id from entries where user_id = ?
+               |  195  SQL
+ 210.5ms     3 |  196      comments_for_me_sub = db.xquery(comments_for_me_query_sub, current_user[:id])
+               |  197      entry_ids = []
+   0.2ms     1 |  198      comments_for_me_sub.each do |r|
+               |  199        entry_ids << r[:id]
+               |  200      end
+              .......
+               |  208      limit 10
+               |  209  SQL
+ 576.3ms     2 |  210      comments_for_me = db.xquery(comments_for_me_query, entry_ids)
+               |  211
+               |  212      entries_of_friends = []
+               |  213      friend_ids = []
+               |  214      user_id = session[:user_id]
+ 707.9ms     3 |  215      db.xquery('select another from relations where one = ?', user_id).each do |f|
+               |  216        friend_ids << f[:another]
+               |  217      end
+ 339.4ms  2778 |  218      db.query('SELECT * FROM entries ORDER BY id DESC LIMIT 1000').each do |entry|
+               |  219        #next unless is_friend?(entry[:user_id])
+   1.6ms   925 |  220        next unless friend_ids.include?(entry[:user_id])
+   0.4ms    20 |  221        entry[:title] = entry[:body].split(/\n/).first
+               |  222        entries_of_friends << entry
+               |  223        break if entries_of_friends.size >= 10
+              .......
+               |  225
+               |  226      comments_of_friends = []
+  57.0ms  3003 |  227      db.query('SELECT * FROM comments ORDER BY id DESC LIMIT 1000').each do |comment|
+               |  228        #next unless is_friend?(comment[:user_id])
+   1.2ms  1000 |  229        next unless friend_ids.include?(comment[:user_id])
+  27.6ms    70 |  230        entry = db.xquery('SELECT * FROM entries WHERE id = ?', comment[:entry_id]).first
+               |  231        entry[:is_private] = (entry[:private] == 1)
+   0.3ms     1 |  232        next if entry[:is_private] && !permitted?(entry[:user_id])
+               |  233        comments_of_friends << comment
+               |  234        break if comments_of_friends.size >= 10
+              .......
+               |  237      friends_query = 'SELECT * FROM relations WHERE one = ? ORDER BY id DESC'
+               |  238      friends_map = {}
+  20.3ms   322 |  239      db.xquery(friends_query, current_user[:id]).each do |rel|
+               |  240        key = (rel[:one] == current_user[:id] ? :another : :one)
+               |  241        friends_map[rel[key]] ||= rel[:created_at]
+              .......
+               |  252  LIMIT 10
+               |  253  SQL
+ 486.3ms     3 |  254      footprints = db.xquery(query, current_user[:id])
+               |  255
+               |  256      locals = {
+              .......
+               |  263        footprints: footprints
+               |  264      }
+  39.1ms     1 |  265      erb :index, locals: locals
+               |  266    end
+               |  267
+
+
+[Rack::Lineprof] ===============================================================
+
+app.rb
+               |  18    module TimeWithoutZone
+               |  19      def to_s
+   0.3ms    78 |  20        strftime("%F %H:%M:%S")
+               |  21      end
+               |  22    end
+              .......
+               |  50      def db
+               |  51        return Thread.current[:isucon5_db] if Thread.current[:isucon5_db]
+   1.7ms     2 |  52        client = Mysql2::Client.new(
+               |  53          socket: '/var/run/mysqld/mysqld.sock',
+               |  54          #host: config[:db][:host],
+              .......
+               |  81      def current_user
+               |  82        return @user if @user
+   0.2ms     2 |  83        unless session[:user_id]
+               |  84          return nil
+               |  85        end
+   2.2ms     6 |  86        @user = db.xquery('SELECT id, account_name, nick_name, email FROM users WHERE id=?', session[:user_id]).first
+               |  87        unless @user
+               |  88          session[:user_id] = nil
+              .......
+               |  94
+               |  95      def authenticated!
+   2.4ms     1 |  96        unless current_user
+               |  97          redirect '/login'
+               |  98        end
+              .......
+               |  100
+               |  101      def get_user(user_id)
+  29.1ms   112 |  102        user = db.xquery('SELECT * FROM users WHERE id = ?', user_id).first
+               |  103        raise Isucon5::ContentNotFound unless user
+               |  104        user
+              .......
+               |  115        # query = 'SELECT COUNT(*) AS cnt FROM relations WHERE (one = ? AND another = ?)'
+               |  116        query = 'SELECT 1 AS cnt FROM relations WHERE (one = ? AND another = ?) limit 1'
+   0.2ms     5 |  117        !db.xquery(query, user_id, another_id).first.nil?
+               |  118      end
+               |  119
+              .......
+               |  123
+               |  124      def permitted?(another_id)
+   0.3ms     2 |  125        another_id == current_user[:id] || is_friend?(another_id)
+               |  126      end
+               |  127
+              .......
+               |  175
+               |  176    get '/' do
+   2.5ms     1 |  177      authenticated!
+               |  178
+   0.4ms     9 |  179      profile = db.xquery('SELECT * FROM profiles WHERE user_id = ?', current_user[:id]).first
+               |  180
+               |  181      entries_query = 'SELECT * FROM entries WHERE user_id = ? ORDER BY created_at LIMIT 5'
+  28.6ms     3 |  182      entries = db.xquery(entries_query, current_user[:id])
+   0.2ms    22 |  183        .map{ |entry| entry[:is_private] = (entry[:private] == 1); entry[:title], entry[:content] = entry[:body].split(/\n/, 2); entry }
+               |  184
+               |  185      #comments_for_me_query = <<SQL
+              .......
+               |  194      select id as id from entries where user_id = ?
+               |  195  SQL
+ 210.6ms     3 |  196      comments_for_me_sub = db.xquery(comments_for_me_query_sub, current_user[:id])
+               |  197      entry_ids = []
+               |  198      comments_for_me_sub.each do |r|
+              .......
+               |  208      limit 10
+               |  209  SQL
+ 576.4ms     2 |  210      comments_for_me = db.xquery(comments_for_me_query, entry_ids)
+               |  211
+               |  212      entries_of_friends = []
+               |  213      friend_ids = []
+               |  214      user_id = session[:user_id]
+ 707.8ms     3 |  215      db.xquery('select another from relations where one = ?', user_id).each do |f|
+               |  216        friend_ids << f[:another]
+               |  217      end
+ 339.5ms  2778 |  218      db.query('SELECT * FROM entries ORDER BY id DESC LIMIT 1000').each do |entry|
+               |  219        #next unless is_friend?(entry[:user_id])
+   1.5ms   925 |  220        next unless friend_ids.include?(entry[:user_id])
+   0.4ms    20 |  221        entry[:title] = entry[:body].split(/\n/).first
+               |  222        entries_of_friends << entry
+               |  223        break if entries_of_friends.size >= 10
+              .......
+               |  225
+               |  226      comments_of_friends = []
+  57.1ms  3003 |  227      db.query('SELECT * FROM comments ORDER BY id DESC LIMIT 1000').each do |comment|
+               |  228        #next unless is_friend?(comment[:user_id])
+   1.3ms  1000 |  229        next unless friend_ids.include?(comment[:user_id])
+  27.8ms    70 |  230        entry = db.xquery('SELECT * FROM entries WHERE id = ?', comment[:entry_id]).first
+               |  231        entry[:is_private] = (entry[:private] == 1)
+   0.3ms     1 |  232        next if entry[:is_private] && !permitted?(entry[:user_id])
+               |  233        comments_of_friends << comment
+               |  234        break if comments_of_friends.size >= 10
+              .......
+               |  237      friends_query = 'SELECT * FROM relations WHERE one = ? ORDER BY id DESC'
+               |  238      friends_map = {}
+  20.1ms   322 |  239      db.xquery(friends_query, current_user[:id]).each do |rel|
+               |  240        key = (rel[:one] == current_user[:id] ? :another : :one)
+               |  241        friends_map[rel[key]] ||= rel[:created_at]
+              .......
+               |  252  LIMIT 10
+               |  253  SQL
+ 486.4ms     3 |  254      footprints = db.xquery(query, current_user[:id])
+               |  255
+               |  256      locals = {
+              .......
+               |  263        footprints: footprints
+               |  264      }
+  39.4ms     1 |  265      erb :index, locals: locals
+               |  266    end
+               |  267
