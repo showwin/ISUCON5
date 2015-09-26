@@ -8,19 +8,19 @@
 # hlsearch on (H) or off (h):
 ~h
 # Last Search Pattern:
-~MSle0~/omments_for_me = db.xquery(comments_for_me_query, entry_ids
+~MSle0~/Mysql2::Client
 
 # Last Substitute String:
 $
 
 # Command Line History (newest to oldest):
-:q
-:w!
-:wq
-:215
-:w
 :q!
+:q
+:wq
 :set paste
+:w
+:w!
+:215
 :SELECT * FROM users WHERE id =
 :noh
 :158
@@ -29,6 +29,8 @@ $
 :nih
 
 # Search String History (newest to oldest):
+?/Mysql2::Client
+?/redirect
 ?/omments_for_me = db.xquery(comments_for_me_query, entry_ids
 ?/db
 ?/get_user
@@ -60,7 +62,6 @@ $
 ?/get
 ?/post
 ?/popst
-?/redirect
 ?/diary/ent
 ?/logout
 ?/\/friends
@@ -78,7 +79,6 @@ $
 ?/\/
 ?//
 ?/comments_of_
-?/comments_for
 
 # Expression History (newest to oldest):
 
@@ -108,29 +108,27 @@ $
 "9	LINE	0
 	slow_queries_log = 1
 ""-	CHAR	0
-	 
+	]
 
 # File marks:
-'0  11  2  /etc/nginx/nginx.conf
-'1  1  0  ~/webapp/ruby/views/index.erb
-'2  1  0  ~/webapp/ruby/log/bullet.log
-'3  231  8  ~/webapp/ruby/app.rb
-'4  13  0  ~/webapp/ruby/app.rb
-'5  24  0  ~/webapp/ruby/app.rb
-'6  1  0  ~/webapp/ruby/views/entr
-'7  1  0  ~/webapp/ruby/views/e
-'8  377  0  ~/webapp/ruby/app.rb
-'9  203  6  ~/webapp/ruby/app.rb
+'0  1  0  ~/webapp/ruby/sudo
+'1  85  8  ~/webapp/ruby/app.rb
+'2  231  8  ~/webapp/ruby/app.rb
+'3  13  0  ~/webapp/ruby/app.rb
+'4  24  0  ~/webapp/ruby/app.rb
+'5  1  0  ~/webapp/ruby/views/entr
+'6  1  0  ~/webapp/ruby/views/e
+'7  377  0  ~/webapp/ruby/app.rb
+'8  203  6  ~/webapp/ruby/app.rb
+'9  79  52  ~/webapp/ruby/views/index.erb
 
 # Jumplist (newest first):
--'  11  2  /etc/nginx/nginx.conf
--'  1  0  /etc/nginx/nginx.conf
--'  1  0  ~/webapp/ruby/views/index.erb
--'  1  0  ~/webapp/ruby/log/bullet.log
+-'  1  0  ~/webapp/ruby/sudo
+-'  85  8  ~/webapp/ruby/app.rb
+-'  1  0  ~/webapp/ruby/app.rb
 -'  231  8  ~/webapp/ruby/app.rb
 -'  210  13  ~/webapp/ruby/app.rb
 -'  215  21  ~/webapp/ruby/app.rb
--'  1  0  ~/webapp/ruby/app.rb
 -'  13  0  ~/webapp/ruby/app.rb
 -'  24  0  ~/webapp/ruby/app.rb
 -'  1  0  ~/webapp/ruby/views/entr
@@ -154,6 +152,7 @@ $
 -'  103  8  ~/webapp/ruby/app.rb
 -'  179  0  ~/webapp/ruby/app.rb
 -'  79  52  ~/webapp/ruby/views/index.erb
+-'  1  0  ~/webapp/ruby/views/index.erb
 -'  91  0  ~/webapp/ruby/views/index.erb
 -'  390  0  ~/webapp/ruby/app.rb
 -'  117  8  ~/webapp/ruby/app.rb
@@ -220,54 +219,16 @@ $
 -'  28  0  ~/webapp/ruby/app.rb
 -'  1  0  ~/webapp/ruby/Gemfile
 -'  1  0  ~/webapp/ruby/views/error.erb
+-'  19  55  ~/webapp/ruby/views/entry.erb
+-'  370  15  ~/webapp/ruby/app.rb
 
 # History of marks within files (newest to oldest):
 
-> /etc/nginx/nginx.conf
-	"	11	2
-	^	11	4
-	.	11	2
-	+	33	4
-	+	20	36
-	+	22	23
-	+	24	0
-	+	22	16
-	+	25	4
-	+	26	18
-	+	29	4
-	+	30	15
-	+	13	6
-	+	16	34
-	+	17	0
-	+	1	18
-	+	11	2
-
-> ~/webapp/ruby/views/index.erb
-	"	1	0
-	^	79	184
-	.	79	183
-	+	33	0
-	+	33	127
-	+	47	110
-	+	62	8
-	+	79	30
-	+	79	94
-	+	80	0
-	+	82	66
-	+	79	183
-
-> ~/webapp/ruby/views/friends.erb
-	"	1	0
-	^	5	131
-	.	5	131
-	+	4	25
-	+	5	131
-
-> ~/webapp/ruby/log/bullet.log
+> ~/webapp/ruby/sudo
 	"	1	0
 
 > ~/webapp/ruby/app.rb
-	"	231	8
+	"	85	8
 	^	28	1
 	.	29	0
 	+	191	91
@@ -327,7 +288,72 @@ $
 	+	10	0
 	+	29	0
 
+> ~/webapp/ruby/views/friends.erb
+	"	1	0
+	^	9	6
+	.	9	0
+	+	1	25
+	+	1	131
+	+	1	27
+	+	9	0
+
+> ~/webapp/ruby/views/index.erb
+	"	80	51
+	^	82	38
+	.	82	66
+	+	33	0
+	+	33	127
+	+	47	110
+	+	62	8
+	+	79	30
+	+	79	94
+	+	80	0
+	+	81	66
+	+	79	183
+	+	79	177
+	+	80	0
+	+	82	66
+
+> ~/webapp/ruby/views/entry.erb
+	"	16	7
+
 > ~/webapp/ruby/views/entries.erb
+	"	1	0
+
+> ~/webapp/ruby/views/e
+	"	1	0
+
+> ~/git_push.sh
+	"	14	0
+	^	23	3
+	.	23	2
+	+	40	0
+	+	29	37
+	+	5	0
+	+	11	2
+	+	17	2
+	+	23	2
+
+> /etc/nginx/nginx.conf
+	"	11	2
+	^	11	4
+	.	11	2
+	+	33	4
+	+	20	36
+	+	22	23
+	+	24	0
+	+	22	16
+	+	25	4
+	+	26	18
+	+	29	4
+	+	30	15
+	+	13	6
+	+	16	34
+	+	17	0
+	+	1	18
+	+	11	2
+
+> ~/webapp/ruby/log/bullet.log
 	"	1	0
 
 > ~/webapp/ruby/Gemfile
@@ -368,9 +394,6 @@ $
 	+	57	25
 	+	58	21
 	+	59	20
-
-> ~/webapp/ruby/views/entry.erb
-	"	1	0
 
 > ~/init.sh
 	"	2	24
@@ -436,17 +459,6 @@ $
 
 > /tmp/slow.log
 	"	1	0
-
-> ~/git_push.sh
-	"	29	0
-	^	23	3
-	.	23	2
-	+	40	0
-	+	29	37
-	+	5	0
-	+	11	2
-	+	17	2
-	+	23	2
 
 > /tmp/access.log
 	"	1	0

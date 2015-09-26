@@ -209,18 +209,23 @@ SQL
 SQL
     comments_for_me = db.xquery(comments_for_me_query, entry_ids)
 
-    entries_of_friends = []
+    entries_of_friends_ids = []
     friend_ids = []
     user_id = session[:user_id]
     db.xquery('select another from relations where one = ?', user_id).each do |f|
       friend_ids << f[:another]
     end
-    db.query('SELECT * FROM entries ORDER BY id DESC LIMIT 1000').each do |entry|
+    db.query('SELECT id, user_id FROM entries ORDER BY id DESC LIMIT 1000').each do |entry|
       #next unless is_friend?(entry[:user_id])
       next unless friend_ids.include?(entry[:user_id])
+      entries_of_friends_ids << entry[:id]
+      break if entries_of_friends_ids.size >= 10
+    end
+
+    entries_of_friends = []
+    db.xquery('select * from entries where id in (?)', entries_of_friends_ids).each do |entry|
       entry[:title] = entry[:body].split(/\n/).first
       entries_of_friends << entry
-      break if entries_of_friends.size >= 10
     end
 
     comments_of_friends = []
@@ -374,15 +379,16 @@ SQL
 
   get '/friends' do
     authenticated!
-    query = 'SELECT r.*, users.nick_name as nick_name, users.account_name as account_name FROM relations as r left outer join users on users.id = r.another WHERE r.one = ? ORDER BY r.id DESC'
-    friends = db.xquery(query, current_user[:id])
-    #friends = {}
-    #db.xquery(query, current_user[:id]).each do |rel|
-    #  key = (rel[:one] == current_user[:id] ? :another : :one)
-    #  friends[rel[key]] ||= rel[:created_at]
-    #end
-    #list = friends.map{|user_id, created_at| [user_id, created_at]}
-    erb :friends, locals: { friends: friends }
+    query = 'SELECT * FROM relations WHERE one = ? ORDER BY id DESC'
+    #query = 'SELECT r.*, users.nick_name as nick_name, users.account_name as account_name FROM relations as r left outer join users on users.id = r.another WHERE r.one = ? ORDER BY r.id DESC'
+    #friends = db.xquery(query, current_user[:id])
+    friends = {}
+    db.xquery(query, current_user[:id]).each do |rel|
+      key = (rel[:one] == current_user[:id] ? :another : :one)
+      friends[rel[key]] ||= rel[:created_at]
+    end
+    list = friends.map{|user_id, created_at| [user_id, created_at]}
+    erb :friends, locals: { friends: list }
   end
 
   post '/friends/:account_name' do
