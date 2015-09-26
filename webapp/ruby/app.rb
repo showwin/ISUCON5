@@ -3,13 +3,13 @@ require 'mysql2'
 require 'mysql2-cs-bind'
 require 'tilt/erubis'
 require 'erubis'
-require 'rack-lineprof'
-require 'bullet'
+#require 'rack-lineprof'
+#require 'bullet'
 
-Bullet.enable = true  
-Bullet.alert = true  
-Bullet.bullet_logger = true  
-Bullet.console = true
+#Bullet.enable = true  
+#Bullet.alert = true  
+#Bullet.bullet_logger = true  
+#Bullet.console = true
 
 module Isucon5
   class AuthenticationError < StandardError; end
@@ -25,8 +25,8 @@ end
 
 class Isucon5::WebApp < Sinatra::Base
   use Rack::Session::Cookie
-  use Rack::Lineprof, profile: 'app.rb'
-  use Bullet::Rack  
+#  use Rack::Lineprof, profile: 'app.rb'
+#  use Bullet::Rack  
   set :erb, escape_html: true
   set :public_folder, File.expand_path('../../static', __FILE__)
   #set :sessions, true
@@ -374,14 +374,15 @@ SQL
 
   get '/friends' do
     authenticated!
-    query = 'SELECT * FROM relations WHERE one = ? ORDER BY id DESC'
-    friends = {}
-    db.xquery(query, current_user[:id]).each do |rel|
-      key = (rel[:one] == current_user[:id] ? :another : :one)
-      friends[rel[key]] ||= rel[:created_at]
-    end
-    list = friends.map{|user_id, created_at| [user_id, created_at]}
-    erb :friends, locals: { friends: list }
+    query = 'SELECT r.*, users.nick_name as nick_name, users.account_name as account_name FROM relations as r left outer join users on users.id = r.another WHERE r.one = ? ORDER BY r.id DESC'
+    friends = db.xquery(query, current_user[:id])
+    #friends = {}
+    #db.xquery(query, current_user[:id]).each do |rel|
+    #  key = (rel[:one] == current_user[:id] ? :another : :one)
+    #  friends[rel[key]] ||= rel[:created_at]
+    #end
+    #list = friends.map{|user_id, created_at| [user_id, created_at]}
+    erb :friends, locals: { friends: friends }
   end
 
   post '/friends/:account_name' do
