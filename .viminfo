@@ -8,24 +8,26 @@
 # hlsearch on (H) or off (h):
 ~h
 # Last Search Pattern:
-~MSle0~/get
+~MSle0~/redirect
 
 # Last Substitute String:
 $
 
 # Command Line History (newest to oldest):
 :q
+:noh
 :w
 :w!
 :q!
 :310
 :185
 :wq
-:noh
 :nih
 :set paste
 
 # Search String History (newest to oldest):
+?/redirect
+?/AND another = 
 ?/get
 ?/SELECT user_id, owner_id, DATE(created_at) AS date
 ?/count(1)
@@ -72,24 +74,26 @@ $
 	t
 
 # File marks:
-'0  229  2  ~/webapp/ruby/app.rb
-'1  1  17  ~/webapp/ruby/unicorn_config.rb
-'2  11  0  /etc/nginx/nginx.conf
-'3  1  0  /etc/nginx/nginx.conf
-'4  1  0  ~/webapp/ruby/views/layout.erb
-'5  1  0  ~/webapp/ruby/app.rb
-'6  8  0  ~/webapp/ruby/views
-'7  303  0  ~/webapp/ruby/app.rb
-'8  186  4  ~/webapp/ruby/app.rb
-'9  185  18  ~/webapp/ruby/app.rb
+'0  172  0  ~/webapp/ruby/app.rb
+'1  384  0  ~/webapp/ruby/app.rb
+'2  103  28  ~/webapp/ruby/app.rb
+'3  1  0  ~/webapp/ruby/app.rb
+'4  13  0  ~/webapp/ruby/app.rb
+'5  11  0  /etc/nginx/nginx.conf
+'6  1  0  /etc/nginx/nginx.conf
+'7  1  0  ~/webapp/ruby/views/layout.erb
+'8  8  0  ~/webapp/ruby/views
+'9  303  0  ~/webapp/ruby/app.rb
 
 # Jumplist (newest first):
--'  229  2  ~/webapp/ruby/app.rb
--'  151  2  ~/webapp/ruby/app.rb
--'  90  8  ~/webapp/ruby/app.rb
--'  22  0  ~/webapp/ruby/app.rb
+-'  172  0  ~/webapp/ruby/app.rb
+-'  87  8  ~/webapp/ruby/app.rb
 -'  1  0  ~/webapp/ruby/app.rb
--'  1  17  ~/webapp/ruby/unicorn_config.rb
+-'  384  0  ~/webapp/ruby/app.rb
+-'  103  28  ~/webapp/ruby/app.rb
+-'  104  68  ~/webapp/ruby/app.rb
+-'  114  0  ~/webapp/ruby/app.rb
+-'  13  0  ~/webapp/ruby/app.rb
 -'  11  0  /etc/nginx/nginx.conf
 -'  1  0  /etc/nginx/nginx.conf
 -'  1  0  ~/webapp/ruby/views/layout.erb
@@ -100,7 +104,6 @@ $
 -'  185  36  ~/webapp/ruby/app.rb
 -'  259  4  ~/webapp/ruby/app.rb
 -'  129  4  ~/webapp/ruby/app.rb
--'  13  0  ~/webapp/ruby/app.rb
 -'  285  4  ~/webapp/ruby/app.rb
 -'  246  4  ~/webapp/ruby/app.rb
 -'  237  4  ~/webapp/ruby/app.rb
@@ -174,21 +177,16 @@ $
 -'  60  0  /etc/sysctl.conf
 -'  1  0  /etc/sysctl.conf
 -'  1  0  /etc/supervisord.conf
--'  1  0  /etc/supervisord.conf
--'  60  0  /etc/sysctl.conf
--'  1  0  /etc/sysctl.conf
--'  1  0  /etc/supervisord.conf
--'  1  0  /etc/supervisord.conf
--'  1  0  ~/.vimrc
--'  60  0  /etc/sysctl.conf
--'  1  0  /etc/sysctl.conf
+-'  11  0  /etc/nginx/nginx.conf
+-'  1  0  /etc/nginx/nginx.conf
+-'  1  0  ~/webapp/ruby/views/layout.erb
 
 # History of marks within files (newest to oldest):
 
 > ~/webapp/ruby/app.rb
-	"	229	2
+	"	172	0
 	^	192	14
-	.	192	14
+	.	104	28
 	+	185	91
 	+	185	40
 	+	185	80
@@ -202,6 +200,7 @@ $
 	+	184	0
 	+	182	18
 	+	192	14
+	+	104	28
 
 > /etc/nginx/nginx.conf
 	"	1	18

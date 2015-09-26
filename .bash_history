@@ -26,3 +26,8 @@ cd .ssh
 ls
 ssh-keygen -t rsa -b 4096 -C "maeda@mmmcorp.co.jp”
 
+ls
+ls
+ls log/
+less log/1300/
+less log/1300/mysql-digest-1300.txt 

@@ -101,8 +101,8 @@ SQL
 
     def is_friend?(another_id)
       user_id = session[:user_id]
-      query = 'SELECT COUNT(*) AS cnt FROM relations WHERE (one = ? AND another = ?) OR (one = ? AND another = ?)'
-      cnt = db.xquery(query, user_id, another_id, another_id, user_id).first[:cnt]
+      query = 'SELECT COUNT(*) AS cnt FROM relations WHERE (one = ? AND another = ?)'
+      cnt = db.xquery(query, user_id, another_id).first[:cnt]
       cnt.to_i > 0 ? true : false
     end
 
