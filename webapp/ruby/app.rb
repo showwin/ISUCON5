@@ -179,14 +179,17 @@ SQL
 #LIMIT 10
 #SQL
     comments_for_me_query_sub = <<SQL
-    select id from entries where user_id = ?    
+    select id as id from entries where user_id = ?    
 SQL
     comments_for_me_sub = db.xquery(comments_for_me_query_sub, current_user[:id])
-    entry_ids = comments_for_me_sub[:id]
-
+    entry_ids = []
+    comments_for_me_sub.each do |r|
+      entry_ids << r[:id]
+    end
+    
     comments_for_me_query = <<SQL
     select id, entry_id, user_id, comment, created_at
-    from comemnts
+    from comments
     where entry_id in (?)
     order by created_at desc
     limit 10
