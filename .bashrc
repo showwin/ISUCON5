@@ -14,3 +14,5 @@ export PATH=/home/isucon/.local/go/bin:$PATH
 export GOROOT=/home/isucon/.local/go
 export GOPATH=/home/isucon/webapp/go
 export PATH=/home/isucon/.local/scala/bin:$PATH
+export AWS_SECRET_ACCESS_KEY=N80xyob1SDYXOnkZaGOPq95WvZkHDQqCzr1iA4ta
+export AWS_ACCESS_KEY_ID=AKIAI6XBKXWXGDBS33BQ
