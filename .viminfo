@@ -8,21 +8,26 @@
 # hlsearch on (H) or off (h):
 ~h
 # Last Search Pattern:
-~MSle0~/logou
+~MSle0~/SELECT user_id, owner_id, DATE(created_at) AS date
+
+# Last Substitute String:
+$
 
 # Command Line History (newest to oldest):
 :q
+:w
+:w!
+:q!
 :310
 :185
 :wq
-:w
 :noh
 :nih
-:q!
-:w!
 :set paste
 
 # Search String History (newest to oldest):
+?/SELECT user_id, owner_id, DATE(created_at) AS date
+?/count(1)
 ?/logou
 ?/comments_for_me_query
 ?/get
@@ -49,14 +54,12 @@
 # Input Line History (newest to oldest):
 
 # Registers:
-"0	LINE	0
-	    location /fonts/ {
-	      open_file_cache max=200;
-	    }
+""0	LINE	0
+	
 "1	LINE	0
-	slow_queries_log = 1
+	
 "2	LINE	0
-	slow_queries_log = 1
+	    comments_for_me_sub = db.xquery(comments_for_me_query_sub, current_user[:id])
 "3	LINE	0
 	p
 "4	LINE	0
@@ -65,45 +68,51 @@
 	slow_queries_log = 1
 "6	LINE	0
 	slow_queries_log = 1
-""-	CHAR	0
-	f
+"-	CHAR	0
+	t
 
 # File marks:
-'0  310  26  ~/webapp/ruby/app.rb
-'1  184  14  ~/webapp/ruby/app.rb
-'2  185  18  ~/webapp/ruby/app.rb
-'3  282  4  ~/webapp/ruby/app.rb
-'4  58  202  ~/slack.sh
-'5  36  13  ~/create_digest.sh
-'6  1  0  /tmp/slow.log
-'7  11  2  ~/git_push.sh
-'8  5  3  ~/git_push.sh
-'9  29  7  ~/git_push.sh
+'0  1  18  /etc/nginx/nginx.conf
+'1  20  0  ~/webapp/ruby/app.rb
+'2  11  0  /etc/nginx/nginx.conf
+'3  1  0  ~/webapp/ruby/views/layout.erb
+'4  1  0  ~/webapp/ruby/app.rb
+'5  8  0  ~/webapp/ruby/views
+'6  303  0  ~/webapp/ruby/app.rb
+'7  186  4  ~/webapp/ruby/app.rb
+'8  185  18  ~/webapp/ruby/app.rb
+'9  285  4  ~/webapp/ruby/app.rb
 
 # Jumplist (newest first):
--'  310  26  ~/webapp/ruby/app.rb
+-'  1  18  /etc/nginx/nginx.conf
+-'  20  0  ~/webapp/ruby/app.rb
+-'  236  0  ~/webapp/ruby/app.rb
+-'  75  0  ~/webapp/ruby/app.rb
 -'  1  0  ~/webapp/ruby/app.rb
--'  184  14  ~/webapp/ruby/app.rb
--'  158  8  ~/webapp/ruby/app.rb
--'  150  8  ~/webapp/ruby/app.rb
--'  185  17  ~/webapp/ruby/app.rb
--'  256  4  ~/webapp/ruby/app.rb
+-'  11  0  /etc/nginx/nginx.conf
+-'  1  0  ~/webapp/ruby/views/layout.erb
+-'  8  0  ~/webapp/ruby/views
+-'  303  0  ~/webapp/ruby/app.rb
+-'  192  13  ~/webapp/ruby/app.rb
+-'  186  4  ~/webapp/ruby/app.rb
+-'  185  36  ~/webapp/ruby/app.rb
+-'  259  4  ~/webapp/ruby/app.rb
 -'  129  4  ~/webapp/ruby/app.rb
 -'  13  0  ~/webapp/ruby/app.rb
--'  282  4  ~/webapp/ruby/app.rb
--'  243  4  ~/webapp/ruby/app.rb
--'  234  4  ~/webapp/ruby/app.rb
+-'  285  4  ~/webapp/ruby/app.rb
+-'  246  4  ~/webapp/ruby/app.rb
+-'  237  4  ~/webapp/ruby/app.rb
 -'  121  8  ~/webapp/ruby/app.rb
--'  297  4  ~/webapp/ruby/app.rb
--'  281  46  ~/webapp/ruby/app.rb
+-'  300  4  ~/webapp/ruby/app.rb
+-'  284  46  ~/webapp/ruby/app.rb
 -'  93  8  ~/webapp/ruby/app.rb
--'  308  0  ~/webapp/ruby/app.rb
--'  236  15  ~/webapp/ruby/app.rb
+-'  311  0  ~/webapp/ruby/app.rb
+-'  239  15  ~/webapp/ruby/app.rb
 -'  171  4  ~/webapp/ruby/app.rb
 -'  105  0  ~/webapp/ruby/app.rb
--'  351  17  ~/webapp/ruby/app.rb
+-'  354  17  ~/webapp/ruby/app.rb
 -'  175  0  ~/webapp/ruby/app.rb
--'  246  0  ~/webapp/ruby/app.rb
+-'  249  0  ~/webapp/ruby/app.rb
 -'  139  0  ~/webapp/ruby/app.rb
 -'  58  202  ~/slack.sh
 -'  1  0  ~/slack.sh
@@ -172,28 +181,8 @@
 -'  60  0  /etc/sysctl.conf
 -'  1  0  /etc/sysctl.conf
 -'  1  0  /etc/supervisord.conf
--'  71  11  ~/.vimrc
--'  1  0  /etc/supervisord.conf
--'  60  0  /etc/sysctl.conf
--'  1  0  /etc/sysctl.conf
--'  1  0  /etc/supervisord.conf
 
 # History of marks within files (newest to oldest):
-
-> ~/webapp/ruby/app.rb
-	"	310	26
-
-> ~/webapp/ruby/unicorn_config.rb
-	"	4	0
-	^	3	26
-	.	1	17
-	+	3	25
-	+	4	0
-	+	3	25
-	+	1	17
-
-> ~/webapp/ruby/views/index.erb
-	"	1	0
 
 > /etc/nginx/nginx.conf
 	"	1	18
@@ -211,6 +200,42 @@
 	+	16	34
 	+	17	0
 	+	1	18
+
+> ~/webapp/ruby/app.rb
+	"	20	0
+	^	192	14
+	.	192	14
+	+	185	91
+	+	185	40
+	+	185	80
+	+	185	18
+	+	188	3
+	+	185	0
+	+	189	0
+	+	189	0
+	+	189	0
+	+	183	3
+	+	184	0
+	+	182	18
+	+	192	14
+
+> /etc/nginx/nginx.
+	"	1	0
+
+> ~/webapp/ruby/unicorn_config.rb
+	"	1	17
+	^	3	26
+	.	1	17
+	+	3	25
+	+	4	0
+	+	3	25
+	+	1	17
+
+> ~/webapp/ruby/views/layout.erb
+	"	1	0
+
+> ~/webapp/ruby/views/index.erb
+	"	58	0
 
 > ~/webapp/ruby/views/entries.erb
 	"	39	0
