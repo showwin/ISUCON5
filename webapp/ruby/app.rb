@@ -99,7 +99,8 @@ SQL
     end
 
     def get_user(user_id)
-      user = db.xquery('SELECT * FROM users WHERE id = ?', user_id).first
+      #user = db.xquery('SELECT * FROM users WHERE id = ?', user_id).first
+      user = db.query("SELECT * FROM users WHERE id = #{user_id}").first
       raise Isucon5::ContentNotFound unless user
       user
     end
@@ -212,7 +213,7 @@ SQL
     entries_of_friends_ids = []
     friend_ids = []
     user_id = session[:user_id]
-    db.xquery('select another from relations where one = ?', user_id).each do |f|
+    db.query("select another from relations where one = #{user_id}").each do |f|
       friend_ids << f[:another]
     end
     db.query('SELECT id, user_id FROM entries ORDER BY id DESC LIMIT 1000').each do |entry|
@@ -366,10 +367,11 @@ SQL
   get '/footprints' do
     authenticated!
     query = <<SQL
-SELECT user_id, owner_id, DATE(created_at) AS date, MAX(created_at) as updated
-FROM footprints
-WHERE user_id = ?
-GROUP BY user_id, owner_id, DATE(created_at)
+SELECT f.user_id, f.owner_id, DATE(f.created_at) AS date, MAX(f.created_at) as updated, users.account_name as account_name, users.nick_name as nick_name
+FROM footprints as f
+left outer join users on users.id = f.owner_id
+WHERE f.user_id = ?
+GROUP BY f.user_id, f.owner_id, DATE(f.created_at)
 ORDER BY updated DESC
 LIMIT 50
 SQL

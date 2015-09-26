@@ -8,19 +8,19 @@
 # hlsearch on (H) or off (h):
 ~h
 # Last Search Pattern:
-~MSle0~/Mysql2::Client
+~MSle0~/omments_for_me = db.xquery(comments_for_me_query, entry_ids
 
 # Last Substitute String:
 $
 
 # Command Line History (newest to oldest):
-:q!
 :q
-:wq
-:set paste
 :w
+:q!
 :w!
+:wq
 :215
+:set paste
 :SELECT * FROM users WHERE id =
 :noh
 :158
@@ -29,11 +29,11 @@ $
 :nih
 
 # Search String History (newest to oldest):
+?/get_user
 ?/Mysql2::Client
 ?/redirect
 ?/omments_for_me = db.xquery(comments_for_me_query, entry_ids
 ?/db
-?/get_user
 ?/users
 ?/user
 ?/is_friend?
@@ -90,49 +90,71 @@ $
 "0	LINE	0
 	      query = 'SELECT COUNT(*) AS cnt FROM relations WHERE (one = ? AND another = ?)'
 "1	LINE	0
-	      cnt.to_i > 0 ? true : false
+	    <% owner = get_user(fp[:owner_id]) %>
 "2	LINE	0
-	      query = 'SELECT 1 AS cnt FROM relations WHERE (one = ? AND another = ?) limit 1'
+	<h2>友だちリスト</h2>
+	<div class="row panel panel-primary" id="friends">
+	  <dl>
+	    <% friends.each do |fr| %>
+	    <dt class="friend-date"><%= fr[:created_at] %></dt><dd class="friend-friend"><a href="/profile/<%= fr[:account_name] %>"><%= fr[:nick_name] %></a></dd>
+	    <% end %>
+	  </dl>
+	</div>
 "3	LINE	0
-	# listen 8080
+	        <% entry_owner = get_user(entry[:user_id]) %>
 "4	LINE	0
-	slow_queries_log = 1
+	      cnt.to_i > 0 ? true : false
 "5	LINE	0
-	p
+	      query = 'SELECT 1 AS cnt FROM relations WHERE (one = ? AND another = ?) limit 1'
 "6	LINE	0
-	    comments_for_me_sub = db.xquery(comments_for_me_query_sub, current_user[:id])
+	# listen 8080
 "7	LINE	0
 	slow_queries_log = 1
 "8	LINE	0
-	slow_queries_log = 1
+	p
 "9	LINE	0
-	slow_queries_log = 1
+	    comments_for_me_sub = db.xquery(comments_for_me_query_sub, current_user[:id])
 ""-	CHAR	0
-	]
+	r
 
 # File marks:
-'0  1  0  ~/webapp/ruby/sudo
-'1  85  8  ~/webapp/ruby/app.rb
-'2  231  8  ~/webapp/ruby/app.rb
-'3  13  0  ~/webapp/ruby/app.rb
-'4  24  0  ~/webapp/ruby/app.rb
-'5  1  0  ~/webapp/ruby/views/entr
-'6  1  0  ~/webapp/ruby/views/e
-'7  377  0  ~/webapp/ruby/app.rb
-'8  203  6  ~/webapp/ruby/app.rb
-'9  79  52  ~/webapp/ruby/views/index.erb
+'0  1  0  ~/webapp/ruby/views/index.erb
+'1  414  0  ~/webapp/ruby/app.rb
+'2  1  0  ~/webapp/ruby/views/layout.erb
+'3  8  0  ~/webapp/ruby/views/footprints.erb
+'4  1  0  ~/webapp/ruby/views/friends.erb
+'5  9  5  ~/webapp/ruby/views/friends.erb
+'6  80  51  ~/webapp/ruby/views/index.erb
+'7  16  7  ~/webapp/ruby/views/entry.erb
+'8  1  0  ~/webapp/ruby/views/entries.erb
+'9  1  0  ~/webapp/ruby/views/e
 
 # Jumplist (newest first):
--'  1  0  ~/webapp/ruby/sudo
--'  85  8  ~/webapp/ruby/app.rb
+-'  1  0  ~/webapp/ruby/views/index.erb
+-'  414  0  ~/webapp/ruby/app.rb
 -'  1  0  ~/webapp/ruby/app.rb
+-'  1  0  ~/webapp/ruby/views/layout.erb
+-'  8  0  ~/webapp/ruby/views/footprints.erb
+-'  5  97  ~/webapp/ruby/views/footprints.erb
+-'  1  0  ~/webapp/ruby/views/footprints.erb
+-'  1  0  ~/webapp/ruby/views/friends.erb
+-'  9  5  ~/webapp/ruby/views/friends.erb
+-'  80  51  ~/webapp/ruby/views/index.erb
+-'  16  7  ~/webapp/ruby/views/entry.erb
+-'  1  0  ~/webapp/ruby/views/entry.erb
+-'  1  0  ~/webapp/ruby/views/entries.erb
+-'  1  0  ~/webapp/ruby/views/e
+-'  14  0  ~/git_push.sh
+-'  1  0  ~/git_push.sh
+-'  11  2  /etc/nginx/nginx.conf
+-'  1  0  /etc/nginx/nginx.conf
+-'  1  0  ~/webapp/ruby/log/bullet.log
 -'  231  8  ~/webapp/ruby/app.rb
 -'  210  13  ~/webapp/ruby/app.rb
 -'  215  21  ~/webapp/ruby/app.rb
 -'  13  0  ~/webapp/ruby/app.rb
 -'  24  0  ~/webapp/ruby/app.rb
 -'  1  0  ~/webapp/ruby/views/entr
--'  1  0  ~/webapp/ruby/views/e
 -'  377  0  ~/webapp/ruby/app.rb
 -'  221  70  ~/webapp/ruby/app.rb
 -'  337  23  ~/webapp/ruby/app.rb
@@ -152,8 +174,7 @@ $
 -'  103  8  ~/webapp/ruby/app.rb
 -'  179  0  ~/webapp/ruby/app.rb
 -'  79  52  ~/webapp/ruby/views/index.erb
--'  1  0  ~/webapp/ruby/views/index.erb
--'  91  0  ~/webapp/ruby/views/index.erb
+-'  90  0  ~/webapp/ruby/views/index.erb
 -'  390  0  ~/webapp/ruby/app.rb
 -'  117  8  ~/webapp/ruby/app.rb
 -'  122  6  ~/webapp/ruby/app.rb
@@ -186,7 +207,6 @@ $
 -'  1  0  ~/create_digest.sh
 -'  1  0  /tmp/slow.log
 -'  11  2  ~/git_push.sh
--'  1  0  ~/git_push.sh
 -'  5  3  ~/git_push.sh
 -'  29  7  ~/git_push.sh
 -'  31  17  /etc/mysql/mysql.conf.d/mysqld.cnf
@@ -207,98 +227,11 @@ $
 -'  2  0  /etc/mysql/mysql.conf.d/mysqld_safe_syslog.cnf
 -'  8  17  /etc/my.cnf
 -'  1  3  ~/.gitignore
--'  1  0  ~/.vimrc
--'  2  0  ~/env.sh
--'  60  0  /etc/sysctl.conf
--'  1  0  /etc/sysctl.conf
--'  1  0  /etc/supervisord.conf
--'  71  11  ~/.vimrc
--'  1  0  ~/webapp/ruby/views/entr
--'  1  0  ~/webapp/ruby/views/e
--'  1  0  ~/webapp/ruby/views/entries.erb
--'  28  0  ~/webapp/ruby/app.rb
--'  1  0  ~/webapp/ruby/Gemfile
--'  1  0  ~/webapp/ruby/views/error.erb
--'  19  55  ~/webapp/ruby/views/entry.erb
--'  370  15  ~/webapp/ruby/app.rb
 
 # History of marks within files (newest to oldest):
 
-> ~/webapp/ruby/sudo
-	"	1	0
-
-> ~/webapp/ruby/app.rb
-	"	85	8
-	^	28	1
-	.	29	0
-	+	191	91
-	+	191	40
-	+	191	80
-	+	191	18
-	+	194	3
-	+	191	0
-	+	195	0
-	+	195	0
-	+	195	0
-	+	189	3
-	+	190	0
-	+	188	18
-	+	198	14
-	+	109	28
-	+	387	0
-	+	109	84
-	+	111	48
-	+	167	0
-	+	166	5
-	+	164	5
-	+	165	5
-	+	109	0
-	+	111	0
-	+	109	7
-	+	111	0
-	+	110	0
-	+	112	10
-	+	109	0
-	+	111	48
-	+	112	14
-	+	111	6
-	+	112	0
-	+	35	10
-	+	37	10
-	+	35	47
-	+	232	68
-	+	4	0
-	+	395	0
-	+	203	6
-	+	204	20
-	+	204	3
-	+	209	0
-	+	204	19
-	+	208	4
-	+	210	6
-	+	211	53
-	+	219	6
-	+	220	55
-	+	206	94
-	+	207	21
-	+	206	77
-	+	205	31
-	+	206	7
-	+	7	0
-	+	10	0
-	+	29	0
-
-> ~/webapp/ruby/views/friends.erb
-	"	1	0
-	^	9	6
-	.	9	0
-	+	1	25
-	+	1	131
-	+	1	27
-	+	9	0
-
 > ~/webapp/ruby/views/index.erb
-	"	80	51
+	"	1	0
 	^	82	38
 	.	82	66
 	+	33	0
@@ -313,6 +246,143 @@ $
 	+	79	177
 	+	80	0
 	+	82	66
+
+> ~/webapp/ruby/app.rb
+	"	414	0
+	^	370	152
+	.	370	143
+	+	192	91
+	+	192	40
+	+	192	80
+	+	192	18
+	+	195	3
+	+	192	0
+	+	196	0
+	+	196	0
+	+	196	0
+	+	190	3
+	+	191	0
+	+	189	18
+	+	199	14
+	+	110	28
+	+	395	0
+	+	110	84
+	+	112	48
+	+	169	0
+	+	169	5
+	+	165	5
+	+	166	5
+	+	110	0
+	+	112	0
+	+	110	7
+	+	112	0
+	+	111	0
+	+	113	10
+	+	110	0
+	+	112	48
+	+	113	14
+	+	112	6
+	+	113	0
+	+	35	10
+	+	37	10
+	+	35	47
+	+	238	68
+	+	4	0
+	+	403	0
+	+	204	6
+	+	205	20
+	+	205	3
+	+	210	0
+	+	205	19
+	+	209	4
+	+	211	6
+	+	212	53
+	+	220	6
+	+	221	55
+	+	207	94
+	+	208	21
+	+	207	77
+	+	206	31
+	+	207	7
+	+	7	0
+	+	10	0
+	+	29	0
+	+	385	4
+	+	387	4
+	+	388	4
+	+	389	4
+	+	390	4
+	+	391	4
+	+	392	44
+	+	385	14
+	+	384	86
+	+	385	12
+	+	392	42
+	+	384	77
+	+	384	154
+	+	219	27
+	+	222	37
+	+	219	24
+	+	213	25
+	+	222	27
+	+	223	34
+	+	226	115
+	+	228	0
+	+	226	4
+	+	229	33
+	+	230	4
+	+	226	26
+	+	222	0
+	+	339	34
+	+	169	0
+	+	169	4
+	+	169	0
+	+	167	0
+	+	102	0
+	+	103	0
+	+	102	6
+	+	103	64
+	+	371	19
+	+	370	63
+	+	372	38
+	+	373	7
+	+	374	38
+	+	370	143
+
+> ~/webapp/ruby/views/layout.erb
+	"	1	0
+
+> ~/webapp/ruby/views/footprints.erb
+	"	8	0
+	^	5	98
+	.	5	98
+	+	5	0
+	+	5	98
+
+> /etc/sysctl.conf
+	"	9	0
+	^	6	29
+	.	6	28
+	+	7	0
+	+	6	28
+
+> /sbin/sysctl
+	"	5	0
+
+> ~/webapp/ruby/sudo
+	"	6	28
+	^	6	29
+	.	6	28
+	+	6	28
+
+> ~/webapp/ruby/views/friends.erb
+	"	1	0
+	^	9	6
+	.	9	0
+	+	1	25
+	+	1	131
+	+	1	27
+	+	9	0
 
 > ~/webapp/ruby/views/entry.erb
 	"	16	7
@@ -429,9 +499,6 @@ $
 	+	3	25
 	+	1	17
 
-> ~/webapp/ruby/views/layout.erb
-	"	1	0
-
 > ~/webapp/ruby/unicorn
 	"	1	0
 
@@ -506,9 +573,6 @@ $
 	^	71	12
 	.	71	5
 	+	71	5
-
-> /etc/sysctl.conf
-	"	60	0
 
 > /etc/supervisord.conf
 	"	1	0
