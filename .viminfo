@@ -8,7 +8,7 @@
 # hlsearch on (H) or off (h):
 ~h
 # Last Search Pattern:
-~MSle0~/SELECT user_id, owner_id, DATE(created_at) AS date
+~MSle0~/get
 
 # Last Substitute String:
 $
@@ -26,11 +26,11 @@ $
 :set paste
 
 # Search String History (newest to oldest):
+?/get
 ?/SELECT user_id, owner_id, DATE(created_at) AS date
 ?/count(1)
 ?/logou
 ?/comments_for_me_query
-?/get
 ?/mark_footprint
 ?/diary/entr
 ?/get_user
@@ -72,24 +72,26 @@ $
 	t
 
 # File marks:
-'0  1  18  /etc/nginx/nginx.conf
-'1  20  0  ~/webapp/ruby/app.rb
+'0  229  2  ~/webapp/ruby/app.rb
+'1  1  17  ~/webapp/ruby/unicorn_config.rb
 '2  11  0  /etc/nginx/nginx.conf
-'3  1  0  ~/webapp/ruby/views/layout.erb
-'4  1  0  ~/webapp/ruby/app.rb
-'5  8  0  ~/webapp/ruby/views
-'6  303  0  ~/webapp/ruby/app.rb
-'7  186  4  ~/webapp/ruby/app.rb
-'8  185  18  ~/webapp/ruby/app.rb
-'9  285  4  ~/webapp/ruby/app.rb
+'3  1  0  /etc/nginx/nginx.conf
+'4  1  0  ~/webapp/ruby/views/layout.erb
+'5  1  0  ~/webapp/ruby/app.rb
+'6  8  0  ~/webapp/ruby/views
+'7  303  0  ~/webapp/ruby/app.rb
+'8  186  4  ~/webapp/ruby/app.rb
+'9  185  18  ~/webapp/ruby/app.rb
 
 # Jumplist (newest first):
--'  1  18  /etc/nginx/nginx.conf
--'  20  0  ~/webapp/ruby/app.rb
--'  236  0  ~/webapp/ruby/app.rb
--'  75  0  ~/webapp/ruby/app.rb
+-'  229  2  ~/webapp/ruby/app.rb
+-'  151  2  ~/webapp/ruby/app.rb
+-'  90  8  ~/webapp/ruby/app.rb
+-'  22  0  ~/webapp/ruby/app.rb
 -'  1  0  ~/webapp/ruby/app.rb
+-'  1  17  ~/webapp/ruby/unicorn_config.rb
 -'  11  0  /etc/nginx/nginx.conf
+-'  1  0  /etc/nginx/nginx.conf
 -'  1  0  ~/webapp/ruby/views/layout.erb
 -'  8  0  ~/webapp/ruby/views
 -'  303  0  ~/webapp/ruby/app.rb
@@ -180,9 +182,26 @@ $
 -'  1  0  ~/.vimrc
 -'  60  0  /etc/sysctl.conf
 -'  1  0  /etc/sysctl.conf
--'  1  0  /etc/supervisord.conf
 
 # History of marks within files (newest to oldest):
+
+> ~/webapp/ruby/app.rb
+	"	229	2
+	^	192	14
+	.	192	14
+	+	185	91
+	+	185	40
+	+	185	80
+	+	185	18
+	+	188	3
+	+	185	0
+	+	189	0
+	+	189	0
+	+	189	0
+	+	183	3
+	+	184	0
+	+	182	18
+	+	192	14
 
 > /etc/nginx/nginx.conf
 	"	1	18
@@ -200,24 +219,6 @@ $
 	+	16	34
 	+	17	0
 	+	1	18
-
-> ~/webapp/ruby/app.rb
-	"	20	0
-	^	192	14
-	.	192	14
-	+	185	91
-	+	185	40
-	+	185	80
-	+	185	18
-	+	188	3
-	+	185	0
-	+	189	0
-	+	189	0
-	+	189	0
-	+	183	3
-	+	184	0
-	+	182	18
-	+	192	14
 
 > /etc/nginx/nginx.
 	"	1	0
