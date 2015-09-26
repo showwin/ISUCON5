@@ -3,6 +3,13 @@ require 'mysql2'
 require 'mysql2-cs-bind'
 require 'tilt/erubis'
 require 'erubis'
+#require 'rack-lineprof'
+#require 'bullet'
+
+#Bullet.enable = true  
+#Bullet.alert = true  
+#Bullet.bullet_logger = true  
+#Bullet.console = true
 
 module Isucon5
   class AuthenticationError < StandardError; end
@@ -18,6 +25,8 @@ end
 
 class Isucon5::WebApp < Sinatra::Base
   use Rack::Session::Cookie
+#  use Rack::Lineprof, profile: 'app.rb'
+#  use Bullet::Rack  
   set :erb, escape_html: true
   set :public_folder, File.expand_path('../../static', __FILE__)
   #set :sessions, true
@@ -28,6 +37,7 @@ class Isucon5::WebApp < Sinatra::Base
     def config
       @config ||= {
         db: {
+          socket: '/var/run/mysqld/mysqld.sock',
           host: ENV['ISUCON5_DB_HOST'] || 'localhost',
           port: ENV['ISUCON5_DB_PORT'] && ENV['ISUCON5_DB_PORT'].to_i,
           username: ENV['ISUCON5_DB_USER'] || 'root',
@@ -40,8 +50,9 @@ class Isucon5::WebApp < Sinatra::Base
     def db
       return Thread.current[:isucon5_db] if Thread.current[:isucon5_db]
       client = Mysql2::Client.new(
-        host: config[:db][:host],
-        port: config[:db][:port],
+        socket: '/var/run/mysqld/mysqld.sock',
+        #host: config[:db][:host],
+        #port: config[:db][:port],
         username: config[:db][:username],
         password: config[:db][:password],
         database: config[:db][:database],
@@ -101,9 +112,9 @@ SQL
 
     def is_friend?(another_id)
       user_id = session[:user_id]
-      query = 'SELECT COUNT(1) AS cnt FROM relations WHERE (one = ? AND another = ?) OR (one = ? AND another = ?)'
-      cnt = db.xquery(query, user_id, another_id, another_id, user_id).first[:cnt]
-      cnt.to_i > 0 ? true : false
+      # query = 'SELECT COUNT(*) AS cnt FROM relations WHERE (one = ? AND another = ?)'
+      query = 'SELECT 1 AS cnt FROM relations WHERE (one = ? AND another = ?) limit 1'
+      !db.xquery(query, user_id, another_id).first.nil?
     end
 
     def is_friend_account?(account_name)
@@ -156,9 +167,10 @@ SQL
   end
 
   get '/logout' do
-    session[:user_id] = nil
-    session.clear
-    redirect '/login'
+    # session[:user_id] = nil
+    # session.clear
+    # redirect '/login'
+    erb :login, layout: false, locals: { message: '高負荷に耐えられるSNSコミュニティサイトへようこそ!' }
   end
 
   get '/' do
@@ -179,31 +191,42 @@ SQL
 #LIMIT 10
 #SQL
     comments_for_me_query_sub = <<SQL
-    select id from entries where user_id = ?    
+    select id as id from entries where user_id = ?    
 SQL
     comments_for_me_sub = db.xquery(comments_for_me_query_sub, current_user[:id])
-    entry_ids = comments_for_me_sub[:id]
-
+    entry_ids = []
+    comments_for_me_sub.each do |r|
+      entry_ids << r[:id]
+    end
+    
     comments_for_me_query = <<SQL
-    select id, entry_id, user_id, comment, created_at
-    from comemnts
-    where entry_id in (?)
-    order by created_at desc
+    select c.id, c.entry_id, c.user_id, c.comment, c.created_at, users.account_name as account_name, users.nick_name as nick_name
+    from comments as c
+    inner join users on users.id = c.user_id
+    where c.entry_id in (?)
+    order by c.id desc
     limit 10
 SQL
     comments_for_me = db.xquery(comments_for_me_query, entry_ids)
 
     entries_of_friends = []
-    db.query('SELECT * FROM entries ORDER BY created_at DESC LIMIT 1000').each do |entry|
-      next unless is_friend?(entry[:user_id])
+    friend_ids = []
+    user_id = session[:user_id]
+    db.xquery('select another from relations where one = ?', user_id).each do |f|
+      friend_ids << f[:another]
+    end
+    db.query('SELECT * FROM entries ORDER BY id DESC LIMIT 1000').each do |entry|
+      #next unless is_friend?(entry[:user_id])
+      next unless friend_ids.include?(entry[:user_id])
       entry[:title] = entry[:body].split(/\n/).first
       entries_of_friends << entry
       break if entries_of_friends.size >= 10
     end
 
     comments_of_friends = []
-    db.query('SELECT * FROM comments ORDER BY created_at DESC LIMIT 1000').each do |comment|
-      next unless is_friend?(comment[:user_id])
+    db.query('SELECT * FROM comments ORDER BY id DESC LIMIT 1000').each do |comment|
+      #next unless is_friend?(comment[:user_id])
+      next unless friend_ids.include?(comment[:user_id])
       entry = db.xquery('SELECT * FROM entries WHERE id = ?', comment[:entry_id]).first
       entry[:is_private] = (entry[:private] == 1)
       next if entry[:is_private] && !permitted?(entry[:user_id])
@@ -211,19 +234,20 @@ SQL
       break if comments_of_friends.size >= 10
     end
 
-    friends_query = 'SELECT * FROM relations WHERE one = ? OR another = ? ORDER BY created_at DESC'
+    friends_query = 'SELECT * FROM relations WHERE one = ? ORDER BY id DESC'
     friends_map = {}
-    db.xquery(friends_query, current_user[:id], current_user[:id]).each do |rel|
+    db.xquery(friends_query, current_user[:id]).each do |rel|
       key = (rel[:one] == current_user[:id] ? :another : :one)
       friends_map[rel[key]] ||= rel[:created_at]
     end
     friends = friends_map.map{|user_id, created_at| [user_id, created_at]}
 
     query = <<SQL
-SELECT user_id, owner_id, DATE(created_at) AS date, MAX(created_at) AS updated
-FROM footprints
-WHERE user_id = ?
-GROUP BY user_id, owner_id, DATE(created_at)
+SELECT f.user_id, f.owner_id, DATE(f.created_at) AS date, MAX(f.created_at) AS updated, users.account_name as account_name, users.nick_name as nick_name
+FROM footprints as f
+INNER JOIN users ON users.id = f.owner_id
+WHERE f.user_id = ?
+GROUP BY f.user_id, f.owner_id, DATE(f.created_at)
 ORDER BY updated DESC
 LIMIT 10
 SQL
@@ -247,9 +271,9 @@ SQL
     prof = db.xquery('SELECT * FROM profiles WHERE user_id = ?', owner[:id]).first
     prof = {} unless prof
     query = if permitted?(owner[:id])
-              'SELECT * FROM entries WHERE user_id = ? ORDER BY created_at LIMIT 5'
+              'SELECT * FROM entries WHERE user_id = ? ORDER BY id LIMIT 5'
             else
-              'SELECT * FROM entries WHERE user_id = ? AND private=0 ORDER BY created_at LIMIT 5'
+              'SELECT * FROM entries WHERE user_id = ? AND private=0 ORDER BY id LIMIT 5'
             end
     entries = db.xquery(query, owner[:id])
       .map{ |entry| entry[:is_private] = (entry[:private] == 1); entry[:title], entry[:content] = entry[:body].split(/\n/, 2); entry }
@@ -286,9 +310,9 @@ SQL
     authenticated!
     owner = user_from_account(params['account_name'])
     query = if permitted?(owner[:id])
-              'SELECT * FROM entries WHERE user_id = ? ORDER BY created_at DESC LIMIT 20'
+              'SELECT * FROM entries WHERE user_id = ? ORDER BY id DESC LIMIT 20'
             else
-              'SELECT * FROM entries WHERE user_id = ? AND private=0 ORDER BY created_at DESC LIMIT 20'
+              'SELECT * FROM entries WHERE user_id = ? AND private=0 ORDER BY id DESC LIMIT 20'
             end
     entries = db.xquery(query, owner[:id])
       .map{ |entry| entry[:is_private] = (entry[:private] == 1); entry[:title], entry[:content] = entry[:body].split(/\n/, 2); entry }
@@ -350,14 +374,15 @@ SQL
 
   get '/friends' do
     authenticated!
-    query = 'SELECT * FROM relations WHERE one = ? OR another = ? ORDER BY created_at DESC'
-    friends = {}
-    db.xquery(query, current_user[:id], current_user[:id]).each do |rel|
-      key = (rel[:one] == current_user[:id] ? :another : :one)
-      friends[rel[key]] ||= rel[:created_at]
-    end
-    list = friends.map{|user_id, created_at| [user_id, created_at]}
-    erb :friends, locals: { friends: list }
+    query = 'SELECT r.*, users.nick_name as nick_name, users.account_name as account_name FROM relations as r left outer join users on users.id = r.another WHERE r.one = ? ORDER BY r.id DESC'
+    friends = db.xquery(query, current_user[:id])
+    #friends = {}
+    #db.xquery(query, current_user[:id]).each do |rel|
+    #  key = (rel[:one] == current_user[:id] ? :another : :one)
+    #  friends[rel[key]] ||= rel[:created_at]
+    #end
+    #list = friends.map{|user_id, created_at| [user_id, created_at]}
+    erb :friends, locals: { friends: friends }
   end
 
   post '/friends/:account_name' do

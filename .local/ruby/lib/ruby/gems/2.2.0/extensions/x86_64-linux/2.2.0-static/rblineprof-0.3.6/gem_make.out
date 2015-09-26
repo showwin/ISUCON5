@@ -1,0 +1,46 @@
+/home/isucon/.local/ruby/bin/ruby -r ./siteconf20150926-21177-1csiq57.rb extconf.rb
+checking for rb_os_allocated_objects()... no
+checking for rb_gc_stat()... yes
+checking for rb_profile_frames()... yes
+checking for rb_tracepoint_new()... yes
+creating Makefile
+
+make "DESTDIR=" clean
+
+make "DESTDIR="
+compiling rblineprof.c
+rblineprof.c: In function ‘cputime_usec’:
+rblineprof.c:148:3: warning: ISO C90 forbids mixed declarations and code [-Wdeclaration-after-statement]
+   struct rusage usage;
+   ^
+rblineprof.c: In function ‘stackframe_record’:
+rblineprof.c:213:3: warning: ISO C90 forbids mixed declarations and code [-Wdeclaration-after-statement]
+   snapshot_t diff = snapshot_diff(&now, &frame->start);
+   ^
+rblineprof.c: In function ‘sourcefile_lookup’:
+rblineprof.c:270:7: warning: ISO C90 forbids mixed declarations and code [-Wdeclaration-after-statement]
+       long rc = rb_reg_search(rblineprof.source_regex, rb_str_new2(filename), 0, 0);
+       ^
+rblineprof.c: In function ‘profiler_hook’:
+rblineprof.c:415:3: warning: ISO C90 forbids mixed declarations and code [-Wdeclaration-after-statement]
+   snapshot_t now = {
+   ^
+rblineprof.c: In function ‘cleanup_files’:
+rblineprof.c:544:3: warning: ISO C90 forbids mixed declarations and code [-Wdeclaration-after-statement]
+   sourcefile_t *sourcefile = (sourcefile_t*)record;
+   ^
+rblineprof.c: In function ‘summarize_files’:
+rblineprof.c:560:3: warning: ISO C90 forbids mixed declarations and code [-Wdeclaration-after-statement]
+   VALUE ret = (VALUE)arg;
+   ^
+rblineprof.c: In function ‘lineprof’:
+rblineprof.c:617:3: warning: ISO C90 forbids mixed declarations and code [-Wdeclaration-after-statement]
+   VALUE filename_class = rb_obj_class(filename);
+   ^
+rblineprof.c:654:3: warning: ISO C90 forbids mixed declarations and code [-Wdeclaration-after-statement]
+   VALUE ret = rb_hash_new();
+   ^
+linking shared-object rblineprof.so
+
+make "DESTDIR=" install
+/usr/bin/install -c -m 0755 rblineprof.so ./.gem.20150926-21177-yk6loi

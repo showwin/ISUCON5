@@ -8,33 +8,77 @@
 # hlsearch on (H) or off (h):
 ~h
 # Last Search Pattern:
-~MSle0~/get_ini
+~MSle0~/omments_for_me = db.xquery(comments_for_me_query, entry_ids
+
+# Last Substitute String:
+$
 
 # Command Line History (newest to oldest):
 :q
-:q!
-:wq
-:w
 :w!
+:wq
+:215
+:w
+:q!
 :set paste
+:SELECT * FROM users WHERE id =
+:noh
+:158
+:310
+:185
+:nih
 
 # Search String History (newest to oldest):
-?/mark_footprint
-?/diary/entr
+?/omments_for_me = db.xquery(comments_for_me_query, entry_ids
+?/db
 ?/get_user
+?/users
+?/user
+?/is_friend?
+?/user_from_account
+?/profile
+?/is_frien
+?/mark_footprint
+?/footprints
+?/\/profile
+?/comment
+?/is_fri
+?/is_friend
+?/config
+?/created_at
+?/update
+?/COUNT
+?/relations
+?/another
+?/or
+?/limit
+?/entries_of_friends
+?/comments_for_me
+?/prefectur
+?/PREFS
+?/prefectures
+?/get
+?/post
+?/popst
+?/redirect
+?/diary/ent
+?/logout
+?/\/friends
+?//friends/
+?/AND another = 
+?/INSERT INTO relations
+?/SELECT user_id, owner_id, DATE(created_at) AS date
+?/count(1)
+?/logou
+?/comments_for_me_query
+?/diary/entr
 ?/authenticated
 ?/'/'
 ?/select c.id
 ?/\/
 ?//
 ?/comments_of_
-?/comment
 ?/comments_for
-?/comments_for_me
-?/comments_for_me_query
-?/JOIN
-?/initi
-?/get_ini
 
 # Expression History (newest to oldest):
 
@@ -44,39 +88,96 @@
 
 # Registers:
 "0	LINE	0
-	    location /fonts/ {
-	      open_file_cache max=200;
-	    }
+	      query = 'SELECT COUNT(*) AS cnt FROM relations WHERE (one = ? AND another = ?)'
 "1	LINE	0
-	# listen 8080
+	      cnt.to_i > 0 ? true : false
 "2	LINE	0
+	      query = 'SELECT 1 AS cnt FROM relations WHERE (one = ? AND another = ?) limit 1'
+"3	LINE	0
+	# listen 8080
+"4	LINE	0
+	slow_queries_log = 1
+"5	LINE	0
+	p
+"6	LINE	0
+	    comments_for_me_sub = db.xquery(comments_for_me_query_sub, current_user[:id])
+"7	LINE	0
+	slow_queries_log = 1
+"8	LINE	0
+	slow_queries_log = 1
+"9	LINE	0
 	slow_queries_log = 1
 ""-	CHAR	0
-	0
+	 
 
 # File marks:
-'0  2  15  ~/webapp/ruby/unicorn_config.rb
-'1  1  0  ~/webapp/ruby/unicorn_config.rb
-'2  1  18  /etc/nginx/nginx.conf
-'3  69  9  ~/webapp/ruby/views/index.erb
-'4  184  0  ~/webapp/ruby/app.rb
-'5  54  20  /etc/mysql/mysql.conf.d/mysqld.cnf
-'6  297  0  ~/webapp/ruby/app.rb
-'7  1  0  ~/webapp/ruby/unicorn
-'8  1  0  ~/webapp/ruby/mu
-'9  4  24  ~/webapp/ruby/unicorn_config.rb
+'0  11  2  /etc/nginx/nginx.conf
+'1  1  0  ~/webapp/ruby/views/index.erb
+'2  1  0  ~/webapp/ruby/log/bullet.log
+'3  231  8  ~/webapp/ruby/app.rb
+'4  13  0  ~/webapp/ruby/app.rb
+'5  24  0  ~/webapp/ruby/app.rb
+'6  1  0  ~/webapp/ruby/views/entr
+'7  1  0  ~/webapp/ruby/views/e
+'8  377  0  ~/webapp/ruby/app.rb
+'9  203  6  ~/webapp/ruby/app.rb
 
 # Jumplist (newest first):
--'  2  15  ~/webapp/ruby/unicorn_config.rb
--'  1  0  ~/webapp/ruby/unicorn_config.rb
--'  1  18  /etc/nginx/nginx.conf
--'  69  9  ~/webapp/ruby/views/index.erb
+-'  11  2  /etc/nginx/nginx.conf
+-'  1  0  /etc/nginx/nginx.conf
 -'  1  0  ~/webapp/ruby/views/index.erb
--'  184  0  ~/webapp/ruby/app.rb
+-'  1  0  ~/webapp/ruby/log/bullet.log
+-'  231  8  ~/webapp/ruby/app.rb
+-'  210  13  ~/webapp/ruby/app.rb
+-'  215  21  ~/webapp/ruby/app.rb
 -'  1  0  ~/webapp/ruby/app.rb
+-'  13  0  ~/webapp/ruby/app.rb
+-'  24  0  ~/webapp/ruby/app.rb
+-'  1  0  ~/webapp/ruby/views/entr
+-'  1  0  ~/webapp/ruby/views/e
+-'  377  0  ~/webapp/ruby/app.rb
+-'  221  70  ~/webapp/ruby/app.rb
+-'  337  23  ~/webapp/ruby/app.rb
+-'  326  8  ~/webapp/ruby/app.rb
+-'  314  20  ~/webapp/ruby/app.rb
+-'  374  66  ~/webapp/ruby/app.rb
+-'  111  8  ~/webapp/ruby/app.rb
+-'  104  8  ~/webapp/ruby/app.rb
+-'  380  11  ~/webapp/ruby/app.rb
+-'  219  19  ~/webapp/ruby/app.rb
+-'  204  18  ~/webapp/ruby/app.rb
+-'  206  62  ~/webapp/ruby/app.rb
+-'  203  6  ~/webapp/ruby/app.rb
+-'  222  18  ~/webapp/ruby/app.rb
+-'  115  41  ~/webapp/ruby/app.rb
+-'  110  8  ~/webapp/ruby/app.rb
+-'  103  8  ~/webapp/ruby/app.rb
+-'  179  0  ~/webapp/ruby/app.rb
+-'  79  52  ~/webapp/ruby/views/index.erb
+-'  91  0  ~/webapp/ruby/views/index.erb
+-'  390  0  ~/webapp/ruby/app.rb
+-'  117  8  ~/webapp/ruby/app.rb
+-'  122  6  ~/webapp/ruby/app.rb
+-'  105  24  ~/webapp/ruby/app.rb
+-'  107  4  ~/webapp/ruby/app.rb
+-'  106  6  ~/webapp/ruby/app.rb
+-'  2  0  ~/webapp/ruby/app.rb
+-'  384  29  ~/webapp/ruby/app.rb
+-'  367  27  ~/webapp/ruby/app.rb
+-'  303  8  ~/webapp/ruby/app.rb
+-'  385  11  ~/webapp/ruby/app.rb
+-'  224  44  ~/webapp/ruby/app.rb
+-'  114  52  ~/webapp/ruby/app.rb
+-'  113  19  ~/webapp/ruby/app.rb
+-'  102  19  ~/webapp/ruby/app.rb
+-'  4  0  ~/webapp/ruby/app.rb
+-'  265  0  ~/webapp/ruby/app.rb
+-'  12  8  ~/webapp/ruby/views/index.erb
+-'  184  0  ~/webapp/ruby/app.rb
 -'  54  20  /etc/mysql/mysql.conf.d/mysqld.cnf
 -'  1  0  /etc/mysql/mysql.conf.d/mysqld.cnf
--'  297  0  ~/webapp/ruby/app.rb
+-'  305  0  ~/webapp/ruby/app.rb
+-'  1  0  ~/webapp/ruby/unicorn_config.rb
 -'  1  0  ~/webapp/ruby/unicorn
 -'  1  0  ~/webapp/ruby/mu
 -'  4  24  ~/webapp/ruby/unicorn_config.rb
@@ -113,73 +214,19 @@
 -'  1  0  /etc/sysctl.conf
 -'  1  0  /etc/supervisord.conf
 -'  71  11  ~/.vimrc
--'  1  0  /etc/supervisord.conf
--'  60  0  /etc/sysctl.conf
--'  1  0  /etc/sysctl.conf
--'  1  0  /etc/supervisord.conf
--'  1  0  /etc/supervisord.conf
--'  60  0  /etc/sysctl.conf
--'  1  0  /etc/sysctl.conf
--'  1  0  /etc/supervisord.conf
--'  1  0  /etc/supervisord.conf
--'  60  0  /etc/sysctl.conf
--'  1  0  /etc/sysctl.conf
--'  1  0  /etc/supervisord.conf
--'  1  0  /etc/supervisord.conf
--'  60  0  /etc/sysctl.conf
--'  1  0  /etc/sysctl.conf
--'  1  0  /etc/supervisord.conf
--'  1  0  /etc/supervisord.conf
--'  60  0  /etc/sysctl.conf
--'  1  0  /etc/sysctl.conf
--'  1  0  /etc/supervisord.conf
--'  1  0  /etc/supervisord.conf
--'  60  0  /etc/sysctl.conf
--'  1  0  /etc/sysctl.conf
--'  1  0  /etc/supervisord.conf
--'  1  0  /etc/supervisord.conf
--'  60  0  /etc/sysctl.conf
--'  1  0  /etc/sysctl.conf
--'  1  0  /etc/supervisord.conf
--'  1  0  /etc/supervisord.conf
--'  1  0  ~/.vimrc
--'  60  0  /etc/sysctl.conf
--'  1  0  /etc/sysctl.conf
--'  1  0  /etc/supervisord.conf
--'  71  11  ~/.vimrc
--'  1  0  /etc/supervisord.conf
--'  60  0  /etc/sysctl.conf
--'  1  0  /etc/sysctl.conf
--'  1  0  /etc/supervisord.conf
--'  1  0  /etc/supervisord.conf
--'  60  0  /etc/sysctl.conf
--'  1  0  /etc/sysctl.conf
--'  1  0  /etc/supervisord.conf
--'  1  0  /etc/supervisord.conf
--'  60  0  /etc/sysctl.conf
--'  1  0  /etc/sysctl.conf
--'  1  0  /etc/supervisord.conf
--'  1  0  /etc/supervisord.conf
--'  60  0  /etc/sysctl.conf
--'  1  0  /etc/sysctl.conf
--'  1  0  /etc/supervisord.conf
--'  1  0  /etc/supervisord.conf
--'  60  0  /etc/sysctl.conf
+-'  1  0  ~/webapp/ruby/views/entr
+-'  1  0  ~/webapp/ruby/views/e
+-'  1  0  ~/webapp/ruby/views/entries.erb
+-'  28  0  ~/webapp/ruby/app.rb
+-'  1  0  ~/webapp/ruby/Gemfile
+-'  1  0  ~/webapp/ruby/views/error.erb
 
 # History of marks within files (newest to oldest):
 
-> ~/webapp/ruby/unicorn_config.rb
-	"	2	15
-	^	3	26
-	.	1	17
-	+	3	25
-	+	4	0
-	+	3	25
-	+	1	17
-
 > /etc/nginx/nginx.conf
-	"	1	18
-	.	1	18
+	"	11	2
+	^	11	4
+	.	11	2
 	+	33	4
 	+	20	36
 	+	22	23
@@ -193,18 +240,116 @@
 	+	16	34
 	+	17	0
 	+	1	18
+	+	11	2
 
 > ~/webapp/ruby/views/index.erb
-	"	69	9
+	"	1	0
+	^	79	184
+	.	79	183
+	+	33	0
+	+	33	127
+	+	47	110
+	+	62	8
+	+	79	30
+	+	79	94
+	+	80	0
+	+	82	66
+	+	79	183
+
+> ~/webapp/ruby/views/friends.erb
+	"	1	0
+	^	5	131
+	.	5	131
+	+	4	25
+	+	5	131
+
+> ~/webapp/ruby/log/bullet.log
+	"	1	0
 
 > ~/webapp/ruby/app.rb
-	"	282	4
+	"	231	8
+	^	28	1
+	.	29	0
+	+	191	91
+	+	191	40
+	+	191	80
+	+	191	18
+	+	194	3
+	+	191	0
+	+	195	0
+	+	195	0
+	+	195	0
+	+	189	3
+	+	190	0
+	+	188	18
+	+	198	14
+	+	109	28
+	+	387	0
+	+	109	84
+	+	111	48
+	+	167	0
+	+	166	5
+	+	164	5
+	+	165	5
+	+	109	0
+	+	111	0
+	+	109	7
+	+	111	0
+	+	110	0
+	+	112	10
+	+	109	0
+	+	111	48
+	+	112	14
+	+	111	6
+	+	112	0
+	+	35	10
+	+	37	10
+	+	35	47
+	+	232	68
+	+	4	0
+	+	395	0
+	+	203	6
+	+	204	20
+	+	204	3
+	+	209	0
+	+	204	19
+	+	208	4
+	+	210	6
+	+	211	53
+	+	219	6
+	+	220	55
+	+	206	94
+	+	207	21
+	+	206	77
+	+	205	31
+	+	206	7
+	+	7	0
+	+	10	0
+	+	29	0
 
 > ~/webapp/ruby/views/entries.erb
-	"	39	0
+	"	1	0
+
+> ~/webapp/ruby/Gemfile
+	"	1	0
+	^	11	0
+	.	10	12
+	+	10	12
+
+> ~/webapp/ruby/config.ru
+	"	3	0
+	.	4	0
+	+	4	0
+	+	4	0
+
+> ~/log/1623/mysql-digest-1623.txt
+	"	1	0
+
+> ~/webapp/ruby/views/profile.erb
+	"	1	0
 
 > /etc/mysql/mysql.conf.d/mysqld.cnf
-	"	54	20
+	"	1	0
 	^	59	21
 	.	59	20
 	+	31	24
@@ -223,6 +368,46 @@
 	+	57	25
 	+	58	21
 	+	59	20
+
+> ~/webapp/ruby/views/entry.erb
+	"	1	0
+
+> ~/init.sh
+	"	2	24
+	^	2	25
+	.	2	0
+	+	1	0
+	+	2	0
+
+> ~/webapp/ruby/app
+	"	1	0
+
+> ~/webapp/static/fonts/a
+	"	1	0
+
+> ~/log/1420/mysql-digest-1420.txt
+	"	71	0
+
+> ~/webapp/ruby/views/mi
+	"	1	0
+
+> ~/log/1420/nginx-digest-1420.txt
+	"	6	9
+
+> /etc/nginx/nginx.
+	"	1	0
+
+> ~/webapp/ruby/unicorn_config.rb
+	"	1	17
+	^	3	26
+	.	1	17
+	+	3	25
+	+	4	0
+	+	3	25
+	+	1	17
+
+> ~/webapp/ruby/views/layout.erb
+	"	1	0
 
 > ~/webapp/ruby/unicorn
 	"	1	0

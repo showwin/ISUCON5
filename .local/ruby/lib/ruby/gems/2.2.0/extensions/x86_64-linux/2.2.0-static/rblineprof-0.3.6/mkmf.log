@@ -1,0 +1,196 @@
+have_func: checking for rb_os_allocated_objects()... -------------------- no
+
+"gcc -o conftest -I/home/isucon/.local/ruby/include/ruby-2.2.0/x86_64-linux -I/home/isucon/.local/ruby/include/ruby-2.2.0/ruby/backward -I/home/isucon/.local/ruby/include/ruby-2.2.0 -I. -I/home/isucon/.local/ruby/include     -O3 -fno-fast-math -ggdb3 -Wall -Wextra -Wno-unused-parameter -Wno-parentheses -Wno-long-long -Wno-missing-field-initializers -Wunused-variable -Wpointer-arith -Wwrite-strings -Wdeclaration-after-statement -Wimplicit-function-declaration -Wdeprecated-declarations -Wno-packed-bitfield-compat conftest.c  -L. -L/home/isucon/.local/ruby/lib -Wl,-R/home/isucon/.local/ruby/lib -L. -L/home/isucon/.local/ruby/lib  -fstack-protector -rdynamic -Wl,-export-dynamic     -Wl,-R/home/isucon/.local/ruby/lib -L/home/isucon/.local/ruby/lib -lruby-static  -lpthread -ldl -lcrypt -lm   -lc"
+checked program was:
+/* begin */
+1: #include "ruby.h"
+2: 
+3: int main(int argc, char **argv)
+4: {
+5:   return 0;
+6: }
+/* end */
+
+"gcc -o conftest -I/home/isucon/.local/ruby/include/ruby-2.2.0/x86_64-linux -I/home/isucon/.local/ruby/include/ruby-2.2.0/ruby/backward -I/home/isucon/.local/ruby/include/ruby-2.2.0 -I. -I/home/isucon/.local/ruby/include     -O3 -fno-fast-math -ggdb3 -Wall -Wextra -Wno-unused-parameter -Wno-parentheses -Wno-long-long -Wno-missing-field-initializers -Wunused-variable -Wpointer-arith -Wwrite-strings -Wdeclaration-after-statement -Wimplicit-function-declaration -Wdeprecated-declarations -Wno-packed-bitfield-compat conftest.c  -L. -L/home/isucon/.local/ruby/lib -Wl,-R/home/isucon/.local/ruby/lib -L. -L/home/isucon/.local/ruby/lib  -fstack-protector -rdynamic -Wl,-export-dynamic     -Wl,-R/home/isucon/.local/ruby/lib -L/home/isucon/.local/ruby/lib -lruby-static  -lpthread -ldl -lcrypt -lm   -lc"
+conftest.c: In function ‘t’:
+conftest.c:13:57: error: ‘rb_os_allocated_objects’ undeclared (first use in this function)
+ int t(void) { void ((*volatile p)()); p = (void ((*)()))rb_os_allocated_objects; return 0; }
+                                                         ^
+conftest.c:13:57: note: each undeclared identifier is reported only once for each function it appears in
+conftest.c:13:32: warning: variable ‘p’ set but not used [-Wunused-but-set-variable]
+ int t(void) { void ((*volatile p)()); p = (void ((*)()))rb_os_allocated_objects; return 0; }
+                                ^
+checked program was:
+/* begin */
+ 1: #include "ruby.h"
+ 2: 
+ 3: /*top*/
+ 4: extern int t(void);
+ 5: int main(int argc, char **argv)
+ 6: {
+ 7:   if (argc > 1000000) {
+ 8:     printf("%p", &t);
+ 9:   }
+10: 
+11:   return 0;
+12: }
+13: int t(void) { void ((*volatile p)()); p = (void ((*)()))rb_os_allocated_objects; return 0; }
+/* end */
+
+"gcc -o conftest -I/home/isucon/.local/ruby/include/ruby-2.2.0/x86_64-linux -I/home/isucon/.local/ruby/include/ruby-2.2.0/ruby/backward -I/home/isucon/.local/ruby/include/ruby-2.2.0 -I. -I/home/isucon/.local/ruby/include     -O3 -fno-fast-math -ggdb3 -Wall -Wextra -Wno-unused-parameter -Wno-parentheses -Wno-long-long -Wno-missing-field-initializers -Wunused-variable -Wpointer-arith -Wwrite-strings -Wdeclaration-after-statement -Wimplicit-function-declaration -Wdeprecated-declarations -Wno-packed-bitfield-compat conftest.c  -L. -L/home/isucon/.local/ruby/lib -Wl,-R/home/isucon/.local/ruby/lib -L. -L/home/isucon/.local/ruby/lib  -fstack-protector -rdynamic -Wl,-export-dynamic     -Wl,-R/home/isucon/.local/ruby/lib -L/home/isucon/.local/ruby/lib -lruby-static  -lpthread -ldl -lcrypt -lm   -lc"
+conftest.c: In function ‘t’:
+conftest.c:13:1: warning: implicit declaration of function ‘rb_os_allocated_objects’ [-Wimplicit-function-declaration]
+ int t(void) { rb_os_allocated_objects(); return 0; }
+ ^
+/tmp/ccI9Ywr7.o: In function `t':
+/home/isucon/.local/ruby/lib/ruby/gems/2.2.0/gems/rblineprof-0.3.6/ext/conftest.c:13: undefined reference to `rb_os_allocated_objects'
+collect2: error: ld returned 1 exit status
+checked program was:
+/* begin */
+ 1: #include "ruby.h"
+ 2: 
+ 3: /*top*/
+ 4: extern int t(void);
+ 5: int main(int argc, char **argv)
+ 6: {
+ 7:   if (argc > 1000000) {
+ 8:     printf("%p", &t);
+ 9:   }
+10: 
+11:   return 0;
+12: }
+13: int t(void) { rb_os_allocated_objects(); return 0; }
+/* end */
+
+--------------------
+
+have_func: checking for rb_gc_stat()... -------------------- yes
+
+"gcc -o conftest -I/home/isucon/.local/ruby/include/ruby-2.2.0/x86_64-linux -I/home/isucon/.local/ruby/include/ruby-2.2.0/ruby/backward -I/home/isucon/.local/ruby/include/ruby-2.2.0 -I. -I/home/isucon/.local/ruby/include     -O3 -fno-fast-math -ggdb3 -Wall -Wextra -Wno-unused-parameter -Wno-parentheses -Wno-long-long -Wno-missing-field-initializers -Wunused-variable -Wpointer-arith -Wwrite-strings -Wdeclaration-after-statement -Wimplicit-function-declaration -Wdeprecated-declarations -Wno-packed-bitfield-compat conftest.c  -L. -L/home/isucon/.local/ruby/lib -Wl,-R/home/isucon/.local/ruby/lib -L. -L/home/isucon/.local/ruby/lib  -fstack-protector -rdynamic -Wl,-export-dynamic     -Wl,-R/home/isucon/.local/ruby/lib -L/home/isucon/.local/ruby/lib -lruby-static  -lpthread -ldl -lcrypt -lm   -lc"
+conftest.c: In function ‘t’:
+conftest.c:13:32: warning: variable ‘p’ set but not used [-Wunused-but-set-variable]
+ int t(void) { void ((*volatile p)()); p = (void ((*)()))rb_gc_stat; return 0; }
+                                ^
+checked program was:
+/* begin */
+ 1: #include "ruby.h"
+ 2: 
+ 3: /*top*/
+ 4: extern int t(void);
+ 5: int main(int argc, char **argv)
+ 6: {
+ 7:   if (argc > 1000000) {
+ 8:     printf("%p", &t);
+ 9:   }
+10: 
+11:   return 0;
+12: }
+13: int t(void) { void ((*volatile p)()); p = (void ((*)()))rb_gc_stat; return 0; }
+/* end */
+
+--------------------
+
+have_func: checking for rb_profile_frames()... -------------------- yes
+
+"gcc -o conftest -I/home/isucon/.local/ruby/include/ruby-2.2.0/x86_64-linux -I/home/isucon/.local/ruby/include/ruby-2.2.0/ruby/backward -I/home/isucon/.local/ruby/include/ruby-2.2.0 -I. -I/home/isucon/.local/ruby/include     -O3 -fno-fast-math -ggdb3 -Wall -Wextra -Wno-unused-parameter -Wno-parentheses -Wno-long-long -Wno-missing-field-initializers -Wunused-variable -Wpointer-arith -Wwrite-strings -Wdeclaration-after-statement -Wimplicit-function-declaration -Wdeprecated-declarations -Wno-packed-bitfield-compat conftest.c  -L. -L/home/isucon/.local/ruby/lib -Wl,-R/home/isucon/.local/ruby/lib -L. -L/home/isucon/.local/ruby/lib  -fstack-protector -rdynamic -Wl,-export-dynamic     -Wl,-R/home/isucon/.local/ruby/lib -L/home/isucon/.local/ruby/lib -lruby-static  -lpthread -ldl -lcrypt -lm   -lc"
+conftest.c: In function ‘t’:
+conftest.c:13:57: error: ‘rb_profile_frames’ undeclared (first use in this function)
+ int t(void) { void ((*volatile p)()); p = (void ((*)()))rb_profile_frames; return 0; }
+                                                         ^
+conftest.c:13:57: note: each undeclared identifier is reported only once for each function it appears in
+conftest.c:13:32: warning: variable ‘p’ set but not used [-Wunused-but-set-variable]
+ int t(void) { void ((*volatile p)()); p = (void ((*)()))rb_profile_frames; return 0; }
+                                ^
+checked program was:
+/* begin */
+ 1: #include "ruby.h"
+ 2: 
+ 3: /*top*/
+ 4: extern int t(void);
+ 5: int main(int argc, char **argv)
+ 6: {
+ 7:   if (argc > 1000000) {
+ 8:     printf("%p", &t);
+ 9:   }
+10: 
+11:   return 0;
+12: }
+13: int t(void) { void ((*volatile p)()); p = (void ((*)()))rb_profile_frames; return 0; }
+/* end */
+
+"gcc -o conftest -I/home/isucon/.local/ruby/include/ruby-2.2.0/x86_64-linux -I/home/isucon/.local/ruby/include/ruby-2.2.0/ruby/backward -I/home/isucon/.local/ruby/include/ruby-2.2.0 -I. -I/home/isucon/.local/ruby/include     -O3 -fno-fast-math -ggdb3 -Wall -Wextra -Wno-unused-parameter -Wno-parentheses -Wno-long-long -Wno-missing-field-initializers -Wunused-variable -Wpointer-arith -Wwrite-strings -Wdeclaration-after-statement -Wimplicit-function-declaration -Wdeprecated-declarations -Wno-packed-bitfield-compat conftest.c  -L. -L/home/isucon/.local/ruby/lib -Wl,-R/home/isucon/.local/ruby/lib -L. -L/home/isucon/.local/ruby/lib  -fstack-protector -rdynamic -Wl,-export-dynamic     -Wl,-R/home/isucon/.local/ruby/lib -L/home/isucon/.local/ruby/lib -lruby-static  -lpthread -ldl -lcrypt -lm   -lc"
+conftest.c: In function ‘t’:
+conftest.c:13:1: warning: implicit declaration of function ‘rb_profile_frames’ [-Wimplicit-function-declaration]
+ int t(void) { rb_profile_frames(); return 0; }
+ ^
+checked program was:
+/* begin */
+ 1: #include "ruby.h"
+ 2: 
+ 3: /*top*/
+ 4: extern int t(void);
+ 5: int main(int argc, char **argv)
+ 6: {
+ 7:   if (argc > 1000000) {
+ 8:     printf("%p", &t);
+ 9:   }
+10: 
+11:   return 0;
+12: }
+13: int t(void) { rb_profile_frames(); return 0; }
+/* end */
+
+--------------------
+
+have_func: checking for rb_tracepoint_new()... -------------------- yes
+
+"gcc -o conftest -I/home/isucon/.local/ruby/include/ruby-2.2.0/x86_64-linux -I/home/isucon/.local/ruby/include/ruby-2.2.0/ruby/backward -I/home/isucon/.local/ruby/include/ruby-2.2.0 -I. -I/home/isucon/.local/ruby/include     -O3 -fno-fast-math -ggdb3 -Wall -Wextra -Wno-unused-parameter -Wno-parentheses -Wno-long-long -Wno-missing-field-initializers -Wunused-variable -Wpointer-arith -Wwrite-strings -Wdeclaration-after-statement -Wimplicit-function-declaration -Wdeprecated-declarations -Wno-packed-bitfield-compat conftest.c  -L. -L/home/isucon/.local/ruby/lib -Wl,-R/home/isucon/.local/ruby/lib -L. -L/home/isucon/.local/ruby/lib  -fstack-protector -rdynamic -Wl,-export-dynamic     -Wl,-R/home/isucon/.local/ruby/lib -L/home/isucon/.local/ruby/lib -lruby-static  -lpthread -ldl -lcrypt -lm   -lc"
+conftest.c: In function ‘t’:
+conftest.c:13:57: error: ‘rb_tracepoint_new’ undeclared (first use in this function)
+ int t(void) { void ((*volatile p)()); p = (void ((*)()))rb_tracepoint_new; return 0; }
+                                                         ^
+conftest.c:13:57: note: each undeclared identifier is reported only once for each function it appears in
+conftest.c:13:32: warning: variable ‘p’ set but not used [-Wunused-but-set-variable]
+ int t(void) { void ((*volatile p)()); p = (void ((*)()))rb_tracepoint_new; return 0; }
+                                ^
+checked program was:
+/* begin */
+ 1: #include "ruby.h"
+ 2: 
+ 3: /*top*/
+ 4: extern int t(void);
+ 5: int main(int argc, char **argv)
+ 6: {
+ 7:   if (argc > 1000000) {
+ 8:     printf("%p", &t);
+ 9:   }
+10: 
+11:   return 0;
+12: }
+13: int t(void) { void ((*volatile p)()); p = (void ((*)()))rb_tracepoint_new; return 0; }
+/* end */
+
+"gcc -o conftest -I/home/isucon/.local/ruby/include/ruby-2.2.0/x86_64-linux -I/home/isucon/.local/ruby/include/ruby-2.2.0/ruby/backward -I/home/isucon/.local/ruby/include/ruby-2.2.0 -I. -I/home/isucon/.local/ruby/include     -O3 -fno-fast-math -ggdb3 -Wall -Wextra -Wno-unused-parameter -Wno-parentheses -Wno-long-long -Wno-missing-field-initializers -Wunused-variable -Wpointer-arith -Wwrite-strings -Wdeclaration-after-statement -Wimplicit-function-declaration -Wdeprecated-declarations -Wno-packed-bitfield-compat conftest.c  -L. -L/home/isucon/.local/ruby/lib -Wl,-R/home/isucon/.local/ruby/lib -L. -L/home/isucon/.local/ruby/lib  -fstack-protector -rdynamic -Wl,-export-dynamic     -Wl,-R/home/isucon/.local/ruby/lib -L/home/isucon/.local/ruby/lib -lruby-static  -lpthread -ldl -lcrypt -lm   -lc"
+conftest.c: In function ‘t’:
+conftest.c:13:1: warning: implicit declaration of function ‘rb_tracepoint_new’ [-Wimplicit-function-declaration]
+ int t(void) { rb_tracepoint_new(); return 0; }
+ ^
+checked program was:
+/* begin */
+ 1: #include "ruby.h"
+ 2: 
+ 3: /*top*/
+ 4: extern int t(void);
+ 5: int main(int argc, char **argv)
+ 6: {
+ 7:   if (argc > 1000000) {
+ 8:     printf("%p", &t);
+ 9:   }
+10: 
+11:   return 0;
+12: }
+13: int t(void) { rb_tracepoint_new(); return 0; }
+/* end */
+
+--------------------
+
